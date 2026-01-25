@@ -4,101 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }} | EBD Juv Recon</title>
-    <link rel="icon" href="/assets/favicon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        /* COLE AQUI TODO O SEU CSS DO BLOCO 1 (DESIGN SYSTEM) ATÉ O 6 (GALERIA) */
-        /* Mantenha exatamente o mesmo CSS que você mandou no prompt anterior */
-        {{ css | safe }}
+        /* COLE AQUI TODO O SEU CSS ORIGINAL (Aquelas mil linhas de estilo) */
     </style>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-
     <div id="videoModal" class="modal-overlay" onclick="closeVideo()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="close-modal" onclick="closeVideo()">X</button>
             <div style="padding:56.25% 0 0 0;position:relative;">
-                <iframe id="youtubeFrame" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            </div>
-            <div style="padding: 1.5rem;">
-                <h3 id="modalTitle">Título do Vídeo</h3>
-                <p id="modalDesc" style="font-size: 0.9rem; color: #555;">Descrição...</p>
+                <iframe id="youtubeFrame" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
     </div>
 
     <header>
         <div class="container header-content">
-            <a href="/" class="logo">
-                <img src="/assets/logo.png" alt="EBD Juv Recon">
-            </a>
+            <a href="/" class="logo"><img src="/assets/logo.png" alt="Logo"></a>
             <div class="right-nav-container">
                 <nav>
                     <ul class="nav-links" id="navLinks">
                         <li><a href="/">Início</a></li>
                         <li><a href="/estudos">Estudos</a></li>
                         <li><a href="/biblioteca">Biblioteca</a></li>
-                        <li><a href="#" style="opacity:0.6;">Loja <span class="badge-soon">Em Breve</span></a></li>
                     </ul>
                 </nav>
-                <img src="/assets/cruz.png" class="nav-cross" alt="Cruz">
-                <button class="mobile-menu-btn" onclick="document.getElementById('navLinks').classList.toggle('active')">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                </button>
+                <img src="/assets/cruz.png" class="nav-cross">
             </div>
         </div>
     </header>
 
-    {{ content | safe }}
-
-    <section class="newsletter-section">
-        <div class="container newsletter-content">
-            <div class="newsletter-text">
-                <h2>Não perca nenhum conteúdo</h2>
-                <p>Receba avisos das novas aulas, artigos e vídeos diretamente no seu e-mail.</p>
-            </div>
-            <form class="newsletter-form">
-                <input type="email" placeholder="Seu melhor e-mail" required>
-                <button type="submit" class="btn btn-primary">INSCREVER-SE</button>
-            </form>
-        </div>
-    </section>
+    <main>{{ content | safe }}</main>
 
     <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h4>EBD JUV RECON</h4>
-                    <a href="https://www.instagram.com/juventuderecon/">Instagram ↗</a>
-                </div>
-                </div>
-            <div class="footer-cross-container"><img src="/assets/cruz.png" alt="Cruz"></div>
-            <div class="copyright">&copy; 2026 EBD JUV RECON. Soli Deo Gloria</div>
-        </div>
-    </footer>
+        </footer>
 
     <script>
-        /* SCRIPT DE LOGIN */
+        function openVideo(url) { document.getElementById('youtubeFrame').src = url; document.getElementById('videoModal').style.display = 'flex'; }
+        function closeVideo() { document.getElementById('videoModal').style.display = 'none'; document.getElementById('youtubeFrame').src = ""; }
         if (window.netlifyIdentity) {
             window.netlifyIdentity.on("init", user => {
                 if (!user) { window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; }); }
             });
-        }
-        /* FUNÇÕES DE VÍDEO QUE VOCÊ CRIOU */
-        function openVideo(url, title, desc) {
-            const modal = document.getElementById('videoModal');
-            document.getElementById('youtubeFrame').src = url;
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalDesc').innerText = desc;
-            modal.style.display = 'flex';
-        }
-        function closeVideo() {
-            document.getElementById('videoModal').style.display = 'none';
-            document.getElementById('youtubeFrame').src = ""; 
         }
     </script>
 </body>

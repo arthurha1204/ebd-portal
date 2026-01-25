@@ -2,33 +2,28 @@
 layout: base.njk
 title: Início
 ---
-<main id="home-view" class="page-view active">
+<main class="page-view active">
     <section class="hero">
-        <img src="/assets/marca-dagua.png" class="hero-watermark" alt="Marca D'água">
+        <img src="/assets/marca-dagua.png" class="hero-watermark">
         <div class="container">
-            <div style="max-width: 600px;">
-                <h1>Ensinar. Instruir. Aprender.</h1>
-                <p>Portal da Escola Bíblica Dominical Juv Recon.</p>
-                <a href="/estudos" class="btn btn-accent">Explorar Conteúdos</a>
-            </div>
+            <h1>Ensinar. Instruir. Aprender.</h1>
+            <p>Portal da Escola Bíblica Dominical Juv Recon.</p>
         </div>
     </section>
 
     <div class="container main-grid">
         <section>
-            <h2 style="border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 2rem;">Últimas Atualizações</h2>
-            <div id="unified-feed" class="feed-grid">
+            <h2 class="section-header">Últimas Atualizações</h2>
+            <div class="feed-grid">
                 {%- for post in collections.artigos | reverse -%}
-                <div class="card">
+                <div class="card" onclick="location.href='{{ post.url }}'" style="cursor: pointer;">
                     <div style="height: 200px; position: relative; overflow:hidden;">
-                        <span class="content-type-badge type-article">ARTIGO</span>
                         <img src="{{ post.data.image }}" style="width:100%; height:100%; object-fit:cover;">
                     </div>
                     <div class="card-content">
-                        <h3 style="font-size: 1.2rem;">{{ post.data.title }}</h3>
-                        <p style="font-size: 0.85rem; color: #64748B;">{{ post.data.author }}</p>
-                        <p style="font-size: 0.95rem;">{{ post.data.snippet }}</p>
-                        <a href="{{ post.url }}" class="btn btn-outline" style="width: 100%; margin-top: auto;">LER ARTIGO</a>
+                        <h3>{{ post.data.title }}</h3>
+                        <p>{{ post.data.author }}</p>
+                        <button class="btn btn-outline">LER ARTIGO</button>
                     </div>
                 </div>
                 {%- endfor -%}
@@ -38,12 +33,8 @@ title: Início
         <aside>
             <div class="sidebar-widget">
                 <h3>Categorias</h3>
-                <ul class="cat-list">
-                    <li><a href="/tags/teologia">Teologia</a></li>
-                    <li><a href="/tags/vida-crista">Vida Cristã</a></li>
-                </ul>
-            </div>
-            </aside>
+                </div>
+        </aside>
     </div>
 
     <section class="about-section">
@@ -52,41 +43,12 @@ title: Início
                 <p class="bible-verse-text">"Toda a Escritura é inspirada por Deus..."</p>
                 <span class="bible-verse-ref">2 TIMÓTEO 3:16-17</span>
             </div>
-            <div class="about-split-layout">
-                <div class="story-video-container">
-                    <video autoplay loop muted playsinline><source src="/assets/story.mp4" type="video/mp4"></video>
-                </div>
-                <div class="about-content">
-                    <h2>Quem somos?</h2>
-                    <p>A EBD Juv Recon é uma comunidade viva...</p>
-                </div>
-            </div>
 
-            <div class="stats-container">
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <span class="stat-number" id="classCounter">+80</span>
-                        <span class="stat-label">Aulas Ministradas</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-number" id="seriesCounter">+16</span>
-                        <span class="stat-label">Séries Abordadas</span>
-                    </div>
-                </div>
+            <div class="about-content">
+                <h2>Quem somos?</h2>
+                <p>Nosso propósito é claro: não apenas informar a mente, mas transformar o coração através da exposição fiel das Escrituras para a nossa geração.</p>
             </div>
-
-            <div class="gallery-section">
-                <div class="gallery-title">Nossa Galeria</div>
-                <div class="carousel-container">
-                    <div class="carousel-track">
-                        <div class="carousel-slide"><img src="/assets/galeria-1.jpg"></div>
-                        </div>
-                </div>
+            
             </div>
-        </div>
     </section>
 </main>
-
-<script>
-    /* Cole aqui os scripts de estatísticas (updateStats) e Youtube que puxam os dados */
-</script>
