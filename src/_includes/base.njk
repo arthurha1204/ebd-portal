@@ -138,6 +138,8 @@
         @media (min-width: 768px) { .mobile-menu-btn { display: none; } .nav-links { display: flex; } .main-grid { grid-template-columns: 7fr 3fr; } .hero { padding: 6rem 0; } .about-grid-mixed { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 767px) { .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--primary-color); padding: 1rem; z-index: 999; } .nav-links.active { display: flex; } .mobile-menu-btn { display: block; } .hero { text-align: center; } .about-split-layout { grid-template-columns: 1fr; gap: 3rem; } .story-video-container { max-width: 280px; } .stats-grid { grid-template-columns: 1fr; gap: 3rem; } .logo { height: 40px; } .nav-cross { height: 24px; } .newsletter-content { flex-direction: column; text-align: center; } .newsletter-form { width: 100%; flex-direction: column; } .newsletter-form button { width: 100%; } }
     </style>
+
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
@@ -378,5 +380,17 @@
             fetchLatestVideo();
         });
     </script>
+
+    <script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
 </body>
 </html>
