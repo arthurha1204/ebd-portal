@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }} | EBD Juv Recon</title>
+    <link rel="icon" href="/assets/favicon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --primary-color: #141414;   
@@ -599,6 +601,7 @@
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
+
     <div id="videoModal" class="modal-overlay" onclick="closeVideo()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="close-modal" onclick="closeVideo()">X</button>
@@ -610,32 +613,55 @@
 
     <header>
         <div class="container header-content">
-            <a href="/" class="logo"><img src="/assets/logo.png" alt="Logo"></a>
+            <a href="/" class="logo">
+                <img src="/assets/logo.png" alt="EBD Juv Recon">
+            </a>
             <div class="right-nav-container">
                 <nav>
                     <ul class="nav-links" id="navLinks">
                         <li><a href="/">Início</a></li>
                         <li><a href="/estudos">Estudos</a></li>
                         <li><a href="/biblioteca">Biblioteca</a></li>
+                        <li><a href="#" style="opacity:0.6; cursor: default;">Loja <span class="badge-soon">Em Breve</span></a></li>
                     </ul>
                 </nav>
-                <img src="/assets/cruz.png" class="nav-cross">
+                <img src="/assets/cruz.png" class="nav-cross" alt="Cruz">
             </div>
         </div>
     </header>
 
-    <main>{{ content | safe }}</main>
+    {{ content | safe }}
+
+    <section class="newsletter-section">
+        <div class="container newsletter-content">
+            <div class="newsletter-text">
+                <h2>Não perca nenhum conteúdo</h2>
+                <p>Receba avisos das novas aulas, artigos e vídeos diretamente no seu e-mail.</p>
+            </div>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Seu melhor e-mail" required>
+                <button type="submit" class="btn btn-primary">INSCREVER-SE</button>
+            </form>
+        </div>
+    </section>
 
     <footer>
         </footer>
 
     <script>
-        function openVideo(url) { document.getElementById('youtubeFrame').src = url; document.getElementById('videoModal').style.display = 'flex'; }
-        function closeVideo() { document.getElementById('videoModal').style.display = 'none'; document.getElementById('youtubeFrame').src = ""; }
+        /* Scripts de Login e Modal */
         if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("init", user => {
-                if (!user) { window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; }); }
-            });
+          window.netlifyIdentity.on("init", user => {
+            if (!user) { window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; }); }
+          });
+        }
+        function openVideo(url) {
+            document.getElementById('youtubeFrame').src = url;
+            document.getElementById('videoModal').style.display = 'flex';
+        }
+        function closeVideo() {
+            document.getElementById('videoModal').style.display = 'none';
+            document.getElementById('youtubeFrame').src = ""; 
         }
     </script>
 </body>
