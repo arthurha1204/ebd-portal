@@ -8,22 +8,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
     <style>
         :root {
             --primary-color: #141414;   
             --primary-light: #1f1f1f;   
             --accent-color: #0267a7;    
             --accent-hover: #024f82;
-            
             --bg-body: #F9F7F2;         
             --bg-card: #FFFFFF;         
             --bg-header: #141414;
-            
             --text-main: #141414;       
             --text-muted: #64748B;
             --text-on-dark: #FFFFFF;
-            
             --border-radius: 6px;
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
@@ -53,8 +49,6 @@
         img { max-width: 100%; height: auto; display: block; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; width: 100%; position: relative; z-index: 2; }
         
-        .icon { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
         /* * ==========================================
          * 2. COMPONENTS
          * ==========================================
@@ -73,46 +67,18 @@
         .btn-outline { background: transparent; border: 1px solid var(--primary-color); color: var(--primary-color); }
         .btn-outline:hover { background-color: var(--primary-color); color: #fff; }
 
-        .btn-amazon { 
-            background: #fff; border: 1px solid #e2e8f0; color: #141414; width: 100%; 
-            justify-content: space-between; text-transform: none; padding: 0.6rem 1rem;
+        .card {
+            background: var(--bg-card); border: 1px solid #e2e8f0;
+            border-radius: var(--border-radius); overflow: hidden;
+            transition: var(--transition); height: 100%;
         }
-        .btn-amazon:hover { border-color: #FF9900; color: #FF9900; }
-
-        .tag {
-            display: inline-block; padding: 4px 10px;
-            background-color: #f1f5f9; color: var(--text-muted);
-            font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 700;
-            text-transform: uppercase; border-radius: 4px;
-            cursor: pointer; transition: 0.2s; border: 1px solid #e2e8f0;
-        }
-        .tag:hover { background-color: var(--accent-color); color: #fff; border-color: var(--accent-color); }
-        .tag-blue { background-color: rgba(2, 103, 167, 0.1); color: var(--accent-color); border-color: transparent; }
+        .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--accent-color); }
 
         .badge-soon {
             font-size: 0.6rem; background-color: var(--accent-color); color: #fff;
             padding: 2px 6px; border-radius: 4px; margin-left: 5px;
             text-transform: uppercase; font-weight: 700; vertical-align: middle;
         }
-
-        .content-type-badge {
-            font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 800;
-            text-transform: uppercase; padding: 4px 8px; border-radius: 4px;
-            position: absolute; top: 10px; left: 10px; z-index: 10;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        .type-video { background-color: #ef4444; color: white; }
-        .type-article { background-color: var(--primary-color); color: white; }
-        .type-lesson { background-color: var(--accent-color); color: white; }
-
-        .card {
-            background: var(--bg-card); border: 1px solid #e2e8f0;
-            border-radius: var(--border-radius); overflow: hidden;
-            transition: var(--transition); display: flex; flex-direction: column;
-            height: 100%; position: relative;
-        }
-        .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--accent-color); }
-        .card-content { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
 
         /* * ==========================================
          * 3. HEADER & NAVBAR
@@ -126,33 +92,15 @@
         }
         .header-content { display: flex; justify-content: space-between; align-items: center; }
         
-        .logo { 
-            display: flex; align-items: center; 
-            height: 50px; 
-        }
-        .logo img {
-            height: 100%; 
-            width: auto;
-            object-fit: contain;
-        }
+        .logo { display: flex; align-items: center; height: 50px; }
+        .logo img { height: 100%; width: auto; object-fit: contain; }
 
         .nav-links { display: flex; gap: 2rem; align-items: center; margin-right: 1rem; }
         .nav-links a { font-family: 'Inter', sans-serif; font-size: 0.85rem; text-transform: uppercase; font-weight: 500; opacity: 0.8; }
         .nav-links a:hover, .nav-links a.active { opacity: 1; color: #fff; border-bottom: 2px solid var(--accent-color); }
         
-        /* Container da Direita (Cruz + Mobile Button) */
-        .right-nav-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .nav-cross {
-            height: 30px; 
-            width: auto;
-            opacity: 0.8;
-        }
-
+        .right-nav-container { display: flex; align-items: center; gap: 15px; }
+        .nav-cross { height: 30px; width: auto; opacity: 0.8; }
         .mobile-menu-btn { display: none; background: none; border: none; color: #fff; cursor: pointer; }
 
         /* * ==========================================
@@ -163,28 +111,17 @@
         .page-view.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* HERO COM MARCA D'ÁGUA */
         .hero {
-            background: linear-gradient(to right, #000000, rgba(62, 59, 59, 0.6)), 
-                        url('fundo.jpg');
+            background: linear-gradient(to right, #000000, rgba(62, 59, 59, 0.6)), url('fundo.jpg');
             background-size: cover; background-position: center;
             color: #fff; padding: 5rem 0; margin-top: -2rem; margin-bottom: 3rem;
-            position: relative; /* Necessário para a marca d'água absoluta */
-            overflow: hidden; /* Corta a imagem se sair do banner */
+            position: relative; overflow: hidden;
         }
         .hero h1 { color: #fff !important; }
         
-        /* Estilo da Marca D'água */
         .hero-watermark {
-            position: absolute;
-            top: 0;
-            left: -50px; /* Levemente deslocado para a esquerda */
-            height: 120%; /* Um pouco maior que o banner para cortar bonito */
-            width: auto;
-            opacity: 0.2; /* BEM CLARA (8%) */
-            pointer-events: none; /* Não atrapalha cliques */
-            transform: rotate(5deg); /* Leve inclinação estilosa */
-            z-index: 1; /* Fica atrás do texto (container é z-index 2) */
+            position: absolute; top: 0; left: -50px; height: 120%; width: auto;
+            opacity: 0.2; pointer-events: none; transform: rotate(5deg); z-index: 1;
         }
 
         .main-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
@@ -194,58 +131,13 @@
             background: #fff; border: 1px solid #e2e8f0; padding: 1.5rem;
             margin-bottom: 1.5rem; border-radius: var(--border-radius);
         }
-        .sidebar-widget h3 { font-size: 1rem; text-transform: uppercase; border-bottom: 2px solid var(--accent-color); padding-bottom: 0.5rem; display: inline-block; }
+        .sidebar-widget h3 { font-size: 1rem; text-transform: uppercase; border-bottom: 2px solid var(--accent-color); padding-bottom: 0.5rem; display: inline-block; margin-bottom: 1rem;}
         .cat-list li { border-bottom: 1px solid #f1f5f9; }
         .cat-list a { display: block; padding: 0.75rem 0; font-family: 'Inter', sans-serif; font-size: 0.9rem; }
-        .cat-list a:hover { color: var(--accent-color); padding-left: 5px; font-weight: 600; }
-
+        
         .section-header { 
             display: flex; align-items: center; justify-content: space-between; 
             margin-bottom: 2rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; margin-top: 3rem;
-        }
-        .series-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
-        
-        .series-card {
-            background: #fff; border: 1px solid #e2e8f0; border-radius: var(--border-radius); overflow: hidden;
-            display: flex; flex-direction: column; height: 100%; transition: var(--transition);
-        }
-        .series-card:hover { box-shadow: var(--shadow-md); border-color: var(--accent-color); }
-        .series-header { background: var(--primary-color); padding: 2rem; text-align: center; color: #fff; position: relative; }
-        .series-icon { width: 48px; height: 48px; margin-bottom: 1rem; stroke: var(--accent-color); }
-        
-        .lesson-list { padding: 0; }
-        .lesson-item {
-            padding: 1rem 1.5rem; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;
-            cursor: pointer; transition: background 0.2s;
-        }
-        .lesson-item:hover { background-color: #f8fafc; }
-        .lesson-item h4 { font-size: 0.95rem; margin: 0; font-family: 'Inter', sans-serif; color: var(--text-main); }
-        .lesson-item span { font-size: 0.8rem; color: var(--text-muted); }
-
-        .video-card { cursor: pointer; }
-        .video-thumbnail {
-            position: relative; height: 160px; background: #000; overflow: hidden;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .video-thumbnail img { opacity: 0.7; width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
-        .video-thumbnail:hover img { opacity: 0.5; }
-        .play-icon {
-            position: absolute; width: 40px; height: 40px; fill: #fff; z-index: 2; pointer-events: none;
-        }
-        
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); z-index: 2000; display: none;
-            align-items: center; justify-content: center; padding: 1rem;
-        }
-        .modal-content {
-            background: #fff; width: 100%; max-width: 800px; border-radius: 8px;
-            overflow: hidden; position: relative; animation: zoomIn 0.3s;
-        }
-        @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .close-modal {
-            position: absolute; top: 10px; right: 10px; background: #fff; border: none;
-            width: 30px; height: 30px; border-radius: 50%; font-weight: bold; cursor: pointer; z-index: 10;
         }
 
         /* * ==========================================
@@ -253,369 +145,93 @@
          * ==========================================
          */
         .about-section {
-            background-color: var(--primary-color);
-            color: #fff;
-            padding: 6rem 0;
-            margin-top: 4rem;
-            position: relative;
-            overflow: hidden;
+            background-color: var(--primary-color); color: #fff;
+            padding: 6rem 0; margin-top: 4rem; position: relative; overflow: hidden;
         }
 
         .bible-verse-box {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 4rem auto;
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 2rem;
-            border-radius: 8px;
+            text-align: center; max-width: 800px; margin: 0 auto 4rem auto;
+            border: 1px solid rgba(255,255,255,0.1); padding: 2rem; border-radius: 8px;
             background: rgba(255,255,255,0.02);
         }
-        .bible-verse-text {
-            font-family: 'Merriweather', serif;
-            font-style: italic;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: #e2e8f0;
-        }
-        .bible-verse-ref {
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-        }
+        .bible-verse-text { font-family: 'Merriweather', serif; font-style: italic; font-size: 1.1rem; margin-bottom: 1rem; color: #e2e8f0; }
+        .bible-verse-ref { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--accent-color); text-transform: uppercase; font-size: 0.9rem; }
 
-        .about-split-layout {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr; 
-            gap: 4rem;
-            align-items: start;
-            margin-bottom: 4rem;
-        }
+        .about-split-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: start; margin-bottom: 4rem; }
+        .story-video-container { width: 100%; max-width: 350px; aspect-ratio: 9 / 16; background-color: #000; border-radius: 16px; overflow: hidden; border: 4px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .story-video-container video { width: 100%; height: 100%; object-fit: cover; }
 
-        .story-video-container {
-            width: 100%;
-            max-width: 350px; 
-            aspect-ratio: 9 / 16;
-            background-color: #000;
-            border-radius: 16px;
-            overflow: hidden;
-            position: relative;
-            margin: 0 auto;
-            border: 4px solid rgba(255,255,255,0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            cursor: default; 
-        }
-        
-        .story-video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+        .about-content h2 { font-size: 2.5rem; color: #fff; margin-bottom: 1.5rem; }
+        .about-content p { color: #cbd5e1; font-size: 1.1rem; margin-bottom: 2rem; text-align: justify; }
 
-        .about-content h2 {
-            font-size: 2.5rem;
-            color: #fff;
-            margin-bottom: 1.5rem;
-        }
-        .about-content p {
-            color: #cbd5e1;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            text-align: justify;
-        }
+        .benefits-list { display: grid; gap: 1.5rem; }
+        .benefit-item { display: flex; align-items: flex-start; gap: 1rem; }
+        .benefit-icon { background: rgba(2, 103, 167, 0.2); color: var(--accent-color); width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .benefit-text h4 { font-size: 1.1rem; margin-bottom: 0.2rem; color: #fff; }
+        .benefit-text p { font-size: 0.95rem; color: #94a3b8; margin: 0; }
 
-        .benefits-list {
-            display: grid;
-            gap: 1.5rem;
-        }
-        .benefit-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-        .benefit-icon {
-            background: rgba(2, 103, 167, 0.2);
-            color: var(--accent-color);
-            width: 40px; height: 40px;
-            border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
-        }
-        .benefit-text h4 {
-            font-size: 1.1rem; margin-bottom: 0.2rem; color: #fff;
-        }
-        .benefit-text p {
-            font-size: 0.95rem; color: #94a3b8; margin: 0;
-        }
-
-        /* --- STATS --- */
-        .stats-container {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 3rem 2rem;
-            margin-bottom: 4rem;
-            margin-top: 3rem;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .stat-box {
-            position: relative;
-        }
-        
-        .stat-number {
-            font-family: 'Inter', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--accent-color);
-            line-height: 1;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #fff;
-            opacity: 0.8;
-        }
-        
-        .stat-sub {
-            display: block;
-            margin-top: 1rem;
-            font-family: 'Inter', sans-serif; 
-            font-weight: 800; 
-            font-size: 1.5rem; 
-            color: #94a3b8;
-            font-style: italic;
-            text-transform: uppercase; 
-            letter-spacing: 1px;
-        }
-        
-        .stat-footer {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        
-        .stat-highlight {
-            color: #4ade80; 
-            font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-location {
-            font-size: 1rem;
-            color: #fff;
-        }
+        .stats-container { background: rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 3rem 2rem; margin: 3rem 0 4rem 0; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+        .stat-number { font-family: 'Inter', sans-serif; font-size: 3.5rem; font-weight: 800; color: var(--accent-color); line-height: 1; display: block; margin-bottom: 0.5rem; }
+        .stat-label { font-family: 'Inter', sans-serif; font-size: 1rem; text-transform: uppercase; color: #fff; opacity: 0.8; }
+        .stat-sub { display: block; margin-top: 1rem; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.5rem; color: #94a3b8; font-style: italic; text-transform: uppercase; }
+        .stat-footer { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; margin-top: 1.5rem; }
+        .stat-highlight { color: #4ade80; font-weight: 700; font-family: 'Inter', sans-serif; text-transform: uppercase; font-size: 0.9rem; display: block; margin-bottom: 0.5rem; }
 
         /* * ==========================================
-         * 6. GALERIA CARROSSEL
+         * 6. GALERIA & NEWSLETTER
          * ==========================================
          */
-        .gallery-section {
-            margin-top: 4rem;
-            position: relative;
-        }
-        .gallery-title {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 1.5rem;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            opacity: 0.7;
-        }
-        
-        .carousel-container {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            padding: 1rem 0;
-        }
-        
-        .carousel-track {
-            display: flex;
-            width: calc(250px * 10);
-            animation: scroll 30s linear infinite;
-        }
-        
-        .carousel-slide {
-            width: 250px;
-            height: 180px;
-            flex-shrink: 0;
-            padding: 0 10px;
-        }
-        
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            opacity: 0.8;
-            transition: 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-        
-        .carousel-track:hover {
-            animation-play-state: paused;
-        }
-        
-        .carousel-slide img:hover {
-            opacity: 1;
-            transform: scale(1.05);
-            z-index: 10;
-        }
+        .gallery-title { text-align: center; margin-bottom: 2rem; font-size: 1.5rem; color: #fff; text-transform: uppercase; letter-spacing: 2px; opacity: 0.7; }
+        .carousel-container { width: 100%; overflow: hidden; padding: 1rem 0; }
+        .carousel-track { display: flex; width: calc(250px * 10); animation: scroll 30s linear infinite; }
+        .carousel-slide { width: 250px; height: 180px; flex-shrink: 0; padding: 0 10px; }
+        .carousel-slide img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; opacity: 0.8; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-250px * 5)); } }
 
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-250px * 5)); }
-        }
+        .newsletter-section { background-color: var(--accent-color); padding: 4rem 0; color: #fff; }
+        .newsletter-content { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+        .newsletter-form { display: flex; gap: 0.5rem; flex: 1; min-width: 300px; }
+        .newsletter-form input { flex-grow: 1; padding: 0.8rem 1rem; border-radius: 4px; border: none; }
 
-        /* NEWSLETTER (CORRIGIDO PARA REMOVER A FAIXA BRANCA) */
-        .newsletter-section {
-            background-color: var(--accent-color); /* Fundo Azul */
-            padding: 4rem 0;
-            margin-top: 0; /* <--- ZEREI A MARGEM AQUI PARA COLAR NO CONTEÚDO */
-            color: #fff;
-        }
-        
-        .newsletter-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-            flex-wrap: wrap; 
-        }
-        
-        .newsletter-text {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .newsletter-text h2 {
-            color: #fff;
-            margin-bottom: 0.5rem;
-        }
-        
-        .newsletter-text p {
-            color: rgba(255,255,255,0.9);
-            font-size: 0.95rem;
-        }
-        
-        .newsletter-form {
-            display: flex;
-            gap: 0.5rem;
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .newsletter-form input {
-            flex-grow: 1;
-            padding: 0.8rem 1rem;
-            border-radius: 4px;
-            border: none;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .newsletter-form button {
-            white-space: nowrap; 
-            background-color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-        }
-        
-        .newsletter-form button:hover {
-            background-color: #000;
-            color: #fff;
-        }
-
-        /* Footer */
+        /* FOOTER AJUSTADO */
         footer { background: #000; color: #888; padding: 4rem 0 2rem 0; font-size: 0.9rem; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2.5rem; margin-bottom: 3rem; }
+        .footer-col h4 { color: #fff; margin-bottom: 1.2rem; border-left: 2px solid var(--accent-color); padding-left: 10px; text-transform: uppercase; }
+        .footer-col a { display: block; margin-bottom: 0.6rem; color: #a1a1aa; }
         
-        .footer-col h4 { color: #fff; margin-bottom: 1.2rem; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; border-left: 2px solid var(--accent-color); padding-left: 10px; }
-        
-        .footer-col a { display: block; margin-bottom: 0.6rem; transition: 0.2s; color: #a1a1aa; }
-        .footer-col a:hover { color: #fff; transform: translateX(3px); }
-        
-        /* Centralização da Cruz no Footer */
-        .footer-cross-container {
-            text-align: center;
-            margin-top: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.2; /* Deixa a cruz sutil no fundo */
+        /* Centralização da cruz */
+        .footer-cross-container { 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 3rem 0 1rem 0; 
+            opacity: 0.2; 
         }
-        .footer-cross-container img {
-            width: 40px;
-            height: auto;
-            margin: 0 auto;
+        .footer-cross-container img { width: 40px; }
+
+        /* Centralização do texto */
+        .copyright { 
+            text-align: center; 
+            border-top: 1px solid #1a1a1a;
+            padding-top: 2rem;
         }
 
-        .copyright { border-top: 1px solid #222; padding-top: 2rem; text-align: center; font-size: 0.8rem; opacity: 0.6; }
-
-        /* Media Queries */
-        @media (min-width: 768px) {
-            .mobile-menu-btn { display: none; }
-            .nav-links { display: flex; }
-            .main-grid { grid-template-columns: 7fr 3fr; }
-            .hero { padding: 6rem 0; }
-            .about-grid-mixed { grid-template-columns: 1fr 1fr; }
-        }
+        @media (min-width: 768px) { .main-grid { grid-template-columns: 7fr 3fr; } }
         @media (max-width: 767px) {
-            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--primary-color); padding: 1rem; z-index: 999; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--primary-color); padding: 1rem; }
             .nav-links.active { display: flex; }
             .mobile-menu-btn { display: block; }
-            .hero { text-align: center; }
-            
-            .about-split-layout { grid-template-columns: 1fr; gap: 3rem; }
-            .story-video-container { max-width: 280px; }
-            .stats-grid { grid-template-columns: 1fr; gap: 3rem; } 
-            .logo { height: 40px; }
-            
-            /* Ajuste para a Cruz no Mobile (Menor) */
-            .nav-cross { height: 24px; }
-            
-            /* Newsletter Mobile */
-            .newsletter-content { flex-direction: column; text-align: center; }
-            .newsletter-form { width: 100%; flex-direction: column; }
-            .newsletter-form button { width: 100%; }
+            .about-split-layout { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
         }
     </style>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-
-    <div id="videoModal" class="modal-overlay" onclick="closeVideo()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="close-modal" onclick="closeVideo()">X</button>
-            <div style="padding:56.25% 0 0 0;position:relative;">
-                <iframe id="youtubeFrame" src="" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-
     <header>
         <div class="container header-content">
-            <a href="/" class="logo">
-                <img src="/assets/logo.png" alt="EBD Juv Recon">
-            </a>
+            <a href="/" class="logo"><img src="/assets/logo.png" alt="EBD Juv Recon"></a>
             <div class="right-nav-container">
                 <nav>
                     <ul class="nav-links" id="navLinks">
@@ -626,6 +242,9 @@
                     </ul>
                 </nav>
                 <img src="/assets/cruz.png" class="nav-cross" alt="Cruz">
+                <button class="mobile-menu-btn" onclick="document.getElementById('navLinks').classList.toggle('active')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
             </div>
         </div>
     </header>
@@ -638,7 +257,7 @@
                 <h2>Não perca nenhum conteúdo</h2>
                 <p>Receba avisos das novas aulas, artigos e vídeos diretamente no seu e-mail.</p>
             </div>
-            <form class="newsletter-form">
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Em breve!');">
                 <input type="email" placeholder="Seu melhor e-mail" required>
                 <button type="submit" class="btn btn-primary">INSCREVER-SE</button>
             </form>
@@ -646,23 +265,80 @@
     </section>
 
     <footer>
-        </footer>
+        <div class="footer-cross-container"><img src="/assets/cruz.png" alt="Cruz"></div>
+        <div class="copyright">&copy; 2026 EBD JUV RECON. Soli Deo Gloria</div>
+    </footer>
 
     <script>
-        /* Scripts de Login e Modal */
-        if (window.netlifyIdentity) {
-          window.netlifyIdentity.on("init", user => {
-            if (!user) { window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; }); }
-          });
+        function showPage(pageId) {
+            const fullId = pageId.endsWith('-view') ? pageId : pageId + '-view';
+            document.querySelectorAll('.page-view').forEach(p => {
+                p.classList.remove('active');
+                p.style.display = 'none';
+            });
+            const target = document.getElementById(fullId);
+            if(target) {
+                target.style.display = 'block';
+                setTimeout(() => target.classList.add('active'), 10);
+                window.scrollTo(0,0);
+            }
+            document.getElementById('navLinks').classList.remove('active');
         }
-        function openVideo(url) {
-            document.getElementById('youtubeFrame').src = url;
-            document.getElementById('videoModal').style.display = 'flex';
+
+        async function fetchLatestVideo() {
+            const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?user=paraReconciliar`;
+            try {
+                const response = await fetch(rssUrl);
+                const data = await response.json();
+                if (data.items && data.items.length > 0) {
+                    const video = data.items[0]; 
+                    const videoId = video.guid.split(':')[2]; 
+                    const thumbUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+                    const html = `
+                        <a href="${video.link}" target="_blank" style="display: block; text-decoration: none;">
+                            <div style="position: relative; overflow: hidden; border-radius: 6px; margin-bottom: 0.8rem;">
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.6); padding: 10px; border-radius: 50%; z-index: 2;">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                </div>
+                                <img src="${thumbUrl}" style="width: 100%; display: block; transition: 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            </div>
+                            <h4 style="font-size: 0.95rem; color: var(--primary-color); line-height: 1.4; margin-bottom: 0.2rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${video.title}</h4>
+                            <span style="font-size: 0.75rem; color: #64748B;">Postado em: ${new Date(video.pubDate).toLocaleDateString('pt-BR')}</span>
+                        </a>`;
+                    document.getElementById('latest-video-container').innerHTML = html;
+                }
+            } catch (error) {
+                document.getElementById('latest-video-container').innerHTML = '<p style="font-size:0.8rem; color: #888;">Assista ao vivo no YouTube.</p>';
+            }
         }
-        function closeVideo() {
-            document.getElementById('videoModal').style.display = 'none';
-            document.getElementById('youtubeFrame').src = ""; 
+
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            if(!obj) return;
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = "+" + Math.floor(progress * (end - start) + start);
+                if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchLatestVideo();
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateValue("classCounter", 0, 80, 2000);
+                        animateValue("seriesCounter", 0, 16, 2000);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+            const statsSection = document.querySelector('.stats-container');
+            if(statsSection) observer.observe(statsSection);
+        });
     </script>
 </body>
 </html>

@@ -8,9 +8,7 @@ title: Início
         <div class="container">
             <div style="max-width: 600px;">
                 <h1>Ensinar. Instruir. Aprender.</h1>
-                <p style="font-size: 1.15rem; margin-bottom: 2rem; opacity: 0.9; font-weight: 300;">
-                    Portal de conteúdo da Escola Bíblica Dominical da Juventude da Catedral da Reconciliação. forjando uma geração firmada nas sagradas escrituras!
-                </p>
+                <p style="font-size: 1.15rem; margin-bottom: 2rem; opacity: 0.9;">Portal de conteúdo da Escola Bíblica Dominical da Juventude da Catedral da Reconciliação.</p>
                 <a href="/estudos" class="btn btn-accent">Explorar Conteúdos</a>
             </div>
         </div>
@@ -21,16 +19,9 @@ title: Início
             <h2 style="border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 2rem;">Últimas Atualizações</h2>
             <div id="unified-feed" class="feed-grid">
                 {%- for post in collections.artigos | reverse -%}
-                <div class="card" onclick="location.href='{{ post.url }}'" style="cursor: pointer;">
-                    <div style="height: 200px; position: relative; overflow:hidden;">
-                        <span class="content-type-badge type-article">ARTIGO</span>
-                        <img src="{{ post.data.image }}" style="width:100%; height:100%; object-fit:cover;">
-                    </div>
-                    <div class="card-content">
-                        <h3 style="font-size: 1.2rem; margin-top: 0.5rem;">{{ post.data.title }}</h3>
-                        <p style="font-size: 0.85rem; color: #64748B;">{{ post.data.author }}</p>
-                        <p style="font-size: 0.95rem;">{{ post.data.snippet }}</p>
-                    </div>
+                <div class="card" onclick="location.href='{{ post.url }}'" style="cursor: pointer; padding: 1.5rem;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">{{ post.data.title }}</h3>
+                    <p style="font-size: 0.85rem; color: #64748B;">{{ post.data.author }}</p>
                 </div>
                 {%- endfor -%}
             </div>
@@ -40,13 +31,18 @@ title: Início
             <div class="sidebar-widget">
                 <h3>Categorias</h3>
                 <ul class="cat-list">
-                    <li><a href="/tags/teologia">Teologia</a></li>
-                    <li><a href="/tags/vida-crista">Vida Cristã</a></li>
+                    {%- for tag in collections.tagList -%}
+                    <li><a href="/tags/{{ tag | slugify }}">{{ tag }}</a></li>
+                    {%- endfor -%}
                 </ul>
             </div>
             <div class="sidebar-widget">
                 <h3>Horários</h3>
-                <div><strong>Domingo, 17h40</strong><br>Capela Dr. Marcílio</div>
+                <div><strong>Domingo, 17:40h</strong><br>Capela Dr Marcílio</div>
+            </div>
+            <div class="sidebar-widget">
+                <h3>Última Pregação</h3>
+                <div id="latest-video-container"><span style="font-size: 0.8rem; color: #888;">Carregando vídeo...</span></div>
             </div>
         </aside>
     </div>
@@ -54,36 +50,23 @@ title: Início
     <section class="about-section">
         <div class="container">
             <div class="bible-verse-box">
-                <p class="bible-verse-text">
-                    "Toda a Escritura é inspirada por Deus e útil para o ensino, para a repreensão, para a correção e para a instrução na justiça, para que o homem de Deus seja apto e plenamente preparado para toda boa obra."
-                </p>
+                <p class="bible-verse-text">"Toda a Escritura é inspirada por Deus..."</p>
                 <span class="bible-verse-ref">2 TIMÓTEO 3:16-17</span>
             </div>
-
             <div class="about-split-layout">
                 <div class="story-video-container">
                     <video autoplay loop muted playsinline><source src="/assets/story.mp4" type="video/mp4"></video>
                 </div>
                 <div class="about-content">
                     <h2>Quem somos?</h2>
-                    <p>
-                        A EBD Juv Recon é uma comunidade viva de discípulos comprometidos em viver o Evangelho de forma integral. Nosso propósito é claro: não apenas informar a mente, mas transformar o coração através da exposição fiel das Escrituras para a nossa geração.
-                    </p>
-                </div>
+                    <p>Nosso propósito é claro: não apenas informar a mente, mas transformar o coração através da exposição fiel das Escrituras para a nossa geração.</p>
+                    </div>
             </div>
-
             <div class="stats-container">
                 <div class="stats-grid">
-                    <div class="stat-box">
-                        <span class="stat-number" id="classCounter">+80</span>
-                        <span class="stat-label">Aulas Ministradas</span>
-                    </div>
-                    <div class="stat-box">
-                        <span class="stat-number" id="seriesCounter">+16</span>
-                        <span class="stat-label">Séries Abordadas</span>
-                    </div>
+                    <div class="stat-box"><span class="stat-number" id="classCounter">+80</span><span class="stat-label">Aulas Ministradas</span></div>
+                    <div class="stat-box"><span class="stat-number" id="seriesCounter">+16</span><span class="stat-label">Séries Abordadas</span></div>
                 </div>
-                <span class="stat-sub">E CADA VEZ AUMENTANDO!</span>
             </div>
         </div>
     </section>
