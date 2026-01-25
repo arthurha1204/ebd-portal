@@ -1,11 +1,15 @@
 ---
-title: O maior teste de todos os tempos
+title: Como a Liturgia do Século IV Ainda Influencia Nossos Domingos
 author: Arthur HS
 date: 2026-01-25T03:13:00.000-03:00
-image: /assets/uploads/img-20251005-wa0246.jpg
+image: /assets/uploads/canterburycathedralthrone.jpg
 tags:
   - Artigo
-description: Um texto lindo testando tudo
+description: Neste artigo, exploramos como pequenas ações de serviço podem
+  transformar não apenas a vida de quem recebe, mas também o coração de quem
+  doa. Veja como nossos grupos de apoio têm atuado nos últimos meses e descubra
+  novas oportunidades para se envolver nos projetos sociais da paróquia neste
+  semestre.
 ---
 VAI DAR BOM!!! ESPERO QUE DE BOM DEMAIS\
 \
