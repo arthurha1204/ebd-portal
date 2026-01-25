@@ -1,12 +1,15 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: main # Certifique-se que sua branch principal chama 'main' ou 'master'
 
 media_folder: "src/assets/uploads"
 public_folder: "/assets/uploads"
 
-# Permite testar no seu computador
+# Permite rodar o npx decap-server localmente para testes
 local_backend: true
+
+# Configurações de Locale (para o calendário ficar em PT-BR)
+locale: "pt"
 
 collections:
   # 1. ARTIGOS
@@ -18,25 +21,27 @@ collections:
     fields:
       - {label: "Título", name: "title", widget: "string"}
       - {label: "Autor", name: "author", widget: "string", default: "Equipe EBD"}
-      - {label: "Data", name: "date", widget: "datetime"}
+      - {label: "Data de Publicação", name: "date", widget: "datetime"}
       - {label: "Imagem de Capa", name: "image", widget: "image"}
       - {label: "Tags", name: "tags", widget: "list", default: ["Artigo"]}
-      - {label: "Resumo", name: "description", widget: "text"}
+      - {label: "Resumo (aparece no card)", name: "description", widget: "text"}
       - {label: "Corpo do Texto", name: "body", widget: "markdown"}
 
   # 2. AULAS
   - name: "aulas"
-    label: "Aulas"
+    label: "Aulas (Downloads)"
     folder: "src/aulas"
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Título da Aula", name: "title", widget: "string"}
       - {label: "Ministrante", name: "author", widget: "string"}
-      - {label: "Data", name: "date", widget: "datetime"}
+      - {label: "Data da Aula", name: "date", widget: "datetime"}
       - {label: "Imagem de Capa", name: "image", widget: "image"}
       - {label: "Tags", name: "tags", widget: "list", default: ["Aula"]}
-      - {label: "Resumo", name: "description", widget: "text"}
-      - {label: "Link do PDF/Material", name: "pdf_link", widget: "string", required: false}
+      - {label: "Resumo do que foi ensinado", name: "description", widget: "text"}
+      # MUDANÇA IMPORTANTE: Widget FILE para permitir upload real
+      - {label: "Arquivo de Apoio (PDF/PPT)", name: "pdf", widget: "file", required: false}
       # Relação com Séries
       - {label: "Série Pertencente", name: "serie", widget: "relation", collection: "series", search_fields: ["title"], value_field: "title", required: false}
 
@@ -47,9 +52,11 @@ collections:
     create: true
     fields:
       - {label: "Título da Série", name: "title", widget: "string"}
-      - {label: "Sigla (3 letras)", name: "sigla", widget: "string"}
-      - {label: "Tag Geral", name: "tag_serie", widget: "string", hint: "A mesma tag usada nas aulas"}
-      - {label: "Descrição", name: "description", widget: "text"}
+      - {label: "Sigla (Ex: GEN, ROM)", name: "sigla", widget: "string"}
+      # ADICIONADO: Seletor de cor
+      - {label: "Cor de Destaque", name: "color", widget: "color", default: "#0267a7", required: false}
+      - {label: "Tag Geral", name: "tag_serie", widget: "string", hint: "Use a mesma tag que usará nas aulas individuais"}
+      - {label: "Descrição da Série", name: "description", widget: "text"}
 
   # 4. VÍDEOS
   - name: "videos"
@@ -60,8 +67,9 @@ collections:
       - {label: "Título do Vídeo", name: "title", widget: "string"}
       - {label: "Canal/Autor", name: "author", widget: "string"}
       - {label: "Data de Publicação", name: "date", widget: "datetime"}
-      - {label: "ID do Youtube", name: "youtube_id", widget: "string", hint: "Só o código, ex: dQw4w9WgXcQ"}
-      - {label: "Thumbnail (Capa)", name: "image", widget: "image"}
+      # Ajustado para Link completo para facilitar
+      - {label: "Link do YouTube", name: "youtubeLink", widget: "string", hint: "Cole a URL completa do vídeo"}
+      - {label: "Thumbnail (Capa)", name: "image", widget: "image", hint: "Salve a capa do YouTube e suba aqui"}
       - {label: "Tags", name: "tags", widget: "list", default: ["Vídeo"]}
 
   # 5. LIVROS
@@ -71,8 +79,8 @@ collections:
     create: true
     fields:
       - {label: "Nome do Livro", name: "title", widget: "string"}
-      - {label: "Autor do Livro", name: "book_author", widget: "string"}
-      - {label: "Capa do Livro", name: "image", widget: "image"}
-      - {label: "Breve Resumo", name: "description", widget: "text"}
-      - {label: "Link Amazon", name: "amazon_link", widget: "string"}
+      - {label: "Autor do Livro", name: "author", widget: "string"}
+      - {label: "Capa do Livro", name: "cover", widget: "image"}
+      - {label: "Breve Resumo (Por que ler?)", name: "resumo", widget: "text"}
+      - {label: "Link Amazon", name: "amazonLink", widget: "string"}
       - {label: "Tags", name: "tags", widget: "list", default: ["Livro"]}
