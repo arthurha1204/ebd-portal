@@ -1,0 +1,49 @@
+---
+layout: base.njk
+title: Biblioteca
+---
+
+<main>
+    <div class="container">
+        <div class="section-header">
+            <h2>Biblioteca Recomendada</h2>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Livros para aprofundamento</span>
+        </div>
+        
+        <div class="feed-grid" style="margin-bottom: 4rem;">
+            {% for livro in collections.livros %}
+            <div class="card">
+                {% if livro.data.cover %}
+                <img src="{{ livro.data.cover }}" alt="{{ livro.data.title }}" class="card-img-top" style="height: 250px; object-fit: contain; background: #f1f5f9; padding: 10px;">
+                {% endif %}
+                <div style="padding: 1.5rem; display:flex; flex-direction:column; flex-grow:1;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">{{ livro.data.title }}</h3>
+                    <p style="font-size: 0.85rem; font-weight:700; color:var(--accent-color);">{{ livro.data.author }}</p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; font-style: italic;">"{{ livro.data.resumo }}"</p>
+                    
+                    {% if livro.data.amazonLink %}
+                    <a href="{{ livro.data.amazonLink }}" target="_blank" class="btn btn-outline" style="width: 100%; font-size: 0.75rem; margin-top:auto;">Comprar na Amazon ↗</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="section-header">
+            <h2>Multimídia & Indicações</h2>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Vídeos selecionados</span>
+        </div>
+        
+        <div class="feed-grid" style="padding-bottom: 3rem;">
+            {% for video in collections.videos %}
+            <div class="card">
+                <div style="padding: 1.5rem;">
+                    <h3>{{ video.data.title }}</h3>
+                    <p style="font-size:0.8rem; margin-bottom:1rem;">Por {{ video.data.author }}</p>
+                    <a href="{{ video.data.youtubeLink }}" target="_blank" class="btn btn-primary" style="width:100%">ASSISTIR NO YOUTUBE ▶</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>

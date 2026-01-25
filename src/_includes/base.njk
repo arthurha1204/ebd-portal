@@ -3,12 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} | EBD Juv Recon</title>
+    <title>{{ title }} | EBD Juv Recon - Oficial</title>
     <link rel="icon" href="/assets/favicon.png" type="image/png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
     <style>
+        /* * ==========================================
+         * 1. DESIGN SYSTEM (MANTIDO 100% ORIGINAL)
+         * ==========================================
+         */
         :root {
             --primary-color: #141414;   
             --primary-light: #1f1f1f;   
@@ -70,8 +77,10 @@
         .card {
             background: var(--bg-card); border: 1px solid #e2e8f0;
             border-radius: var(--border-radius); overflow: hidden;
-            transition: var(--transition); height: 100%;
+            transition: var(--transition); height: 100%; display: flex; flex-direction: column;
         }
+        .card-img-top { width: 100%; height: 200px; object-fit: cover; }
+        .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
         .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--accent-color); }
 
         .badge-soon {
@@ -98,21 +107,22 @@
         .nav-links { display: flex; gap: 2rem; align-items: center; margin-right: 1rem; }
         .nav-links a { font-family: 'Inter', sans-serif; font-size: 0.85rem; text-transform: uppercase; font-weight: 500; opacity: 0.8; }
         .nav-links a:hover, .nav-links a.active { opacity: 1; color: #fff; border-bottom: 2px solid var(--accent-color); }
+        /* Active state logic for Eleventy handled via template logic or JS match */
         
         .right-nav-container { display: flex; align-items: center; gap: 15px; }
         .nav-cross { height: 30px; width: auto; opacity: 0.8; }
         .mobile-menu-btn { display: none; background: none; border: none; color: #fff; cursor: pointer; }
 
         /* * ==========================================
-         * 4. VIEWS & SECTIONS
+         * 4. VIEWS & SECTIONS (Adaptado para Static)
          * ==========================================
          */
-        .page-view { display: none; padding-top: 2rem; animation: fadeIn 0.4s ease; min-height: 60vh; }
-        .page-view.active { display: block; }
+        /* .page-view removido pois agora são páginas reais, mas mantendo classes de animação se desejado */
+        main { padding-top: 0; animation: fadeIn 0.4s ease; min-height: 60vh; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .hero {
-            background: linear-gradient(to right, #000000, rgba(62, 59, 59, 0.6)), url('fundo.jpg');
+            background: linear-gradient(to right, #000000, rgba(62, 59, 59, 0.6)), url('/assets/fundo.jpg');
             background-size: cover; background-position: center;
             color: #fff; padding: 5rem 0; margin-top: -2rem; margin-bottom: 3rem;
             position: relative; overflow: hidden;
@@ -226,18 +236,21 @@
             .stats-grid { grid-template-columns: 1fr; }
         }
     </style>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
+
     <header>
         <div class="container header-content">
-            <a href="/" class="logo"><img src="/assets/logo.png" alt="EBD Juv Recon"></a>
+            <a href="/" class="logo">
+                <img src="/assets/logo.png" alt="EBD Juv Recon">
+            </a>
+            
             <div class="right-nav-container">
                 <nav>
                     <ul class="nav-links" id="navLinks">
-                        <li><a href="/">Início</a></li>
-                        <li><a href="/estudos">Estudos</a></li>
-                        <li><a href="/biblioteca">Biblioteca</a></li>
+                        <li><a href="/" class="{% if page.url == '/' %}active{% endif %}">Início</a></li>
+                        <li><a href="/estudos/" class="{% if '/estudos/' in page.url %}active{% endif %}">Estudos</a></li>
+                        <li><a href="/biblioteca/" class="{% if '/biblioteca/' in page.url %}active{% endif %}">Biblioteca</a></li>
                         <li><a href="#" style="opacity:0.6; cursor: default;">Loja <span class="badge-soon">Em Breve</span></a></li>
                     </ul>
                 </nav>
@@ -265,28 +278,56 @@
     </section>
 
     <footer>
-        <div class="footer-cross-container"><img src="/assets/cruz.png" alt="Cruz"></div>
-        <div class="copyright">&copy; 2026 EBD JUV RECON. Soli Deo Gloria</div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>EBD JUV RECON</h4>
+                    <a href="https://www.instagram.com/juventuderecon/" target="_blank">Instagram da Juv ↗</a>
+                    <a href="https://www.instagram.com/parareconciliar/" target="_blank">Instagram da Recon ↗</a>
+                    <a href="https://www.youtube.com/channel/UCKDCvG7gn1U7oVIUho1-vMQ" target="_blank">Canal da Recon ↗</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Igreja Global</h4>
+                    <a href="https://lausanne.org/pt-br" target="_blank">Movimento Lausanne ↗</a>
+                    <a href="https://portasabertas.org.br/" target="_blank">Portas Abertas (Ore) ↗</a>
+                    <a href="https://conscienciacrista.org.br/" target="_blank">Consciência Cristã ↗</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Estudos & Ferramentas</h4>
+                    <a href="http://monergismo.com/" target="_blank">Monergismo ↗</a>
+                    <a href="https://www.ultimato.com.br/" target="_blank">Revista Ultimato ↗</a>
+                    <a href="https://www.biblegateway.com/" target="_blank">Bible Gateway ↗</a>
+                    <a href="https://www.bibliaonline.com.br/" target="_blank">Bíblia Online ↗</a>
+                </div>
+            </div>
+
+            <div class="footer-cross-container">
+                <img src="/assets/cruz.png" alt="Cruz">
+            </div>
+
+            <div class="copyright">
+                &copy; 2026 EBD JUV RECON. Todos os direitos reservados.
+                <br><span style="font-size: 0.75rem; opacity: 0.5;">Soli Deo Gloria</span>
+            </div>
+        </div>
     </footer>
 
     <script>
-        function showPage(pageId) {
-            const fullId = pageId.endsWith('-view') ? pageId : pageId + '-view';
-            document.querySelectorAll('.page-view').forEach(p => {
-                p.classList.remove('active');
-                p.style.display = 'none';
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                }
             });
-            const target = document.getElementById(fullId);
-            if(target) {
-                target.style.display = 'block';
-                setTimeout(() => target.classList.add('active'), 10);
-                window.scrollTo(0,0);
-            }
-            document.getElementById('navLinks').classList.remove('active');
         }
 
         async function fetchLatestVideo() {
             const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?user=paraReconciliar`;
+            const container = document.getElementById('latest-video-container');
+            if(!container) return; // Só roda se o elemento existir na página atual
+
             try {
                 const response = await fetch(rssUrl);
                 const data = await response.json();
@@ -305,10 +346,10 @@
                             <h4 style="font-size: 0.95rem; color: var(--primary-color); line-height: 1.4; margin-bottom: 0.2rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${video.title}</h4>
                             <span style="font-size: 0.75rem; color: #64748B;">Postado em: ${new Date(video.pubDate).toLocaleDateString('pt-BR')}</span>
                         </a>`;
-                    document.getElementById('latest-video-container').innerHTML = html;
+                    container.innerHTML = html;
                 }
             } catch (error) {
-                document.getElementById('latest-video-container').innerHTML = '<p style="font-size:0.8rem; color: #888;">Assista ao vivo no YouTube.</p>';
+                container.innerHTML = '<p style="font-size:0.8rem; color: #888;">Assista ao vivo no YouTube.</p>';
             }
         }
 

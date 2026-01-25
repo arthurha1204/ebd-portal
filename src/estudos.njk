@@ -1,0 +1,44 @@
+---
+layout: base.njk
+title: Estudos
+---
+
+<main>
+    <div class="container">
+        <h1 style="text-align: center; margin-top: 2rem;">Nossos Estudos</h1>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem;">Material organizado por séries e temas.</p>
+        
+        <div id="studies-content">
+            <h2 style="margin-bottom: 1.5rem; border-left: 4px solid var(--accent-color); padding-left: 1rem;">Séries de Estudo</h2>
+            <div class="feed-grid" style="margin-bottom: 3rem;">
+                {% for serie in collections.series %}
+                <div class="card">
+                     <div class="card-body">
+                        <span class="badge-soon" style="margin-left:0;">{{ serie.data.sigla }}</span>
+                        <h3 style="margin-top: 0.5rem;">{{ serie.data.title }}</h3>
+                        <p style="font-size: 0.9rem; color: #64748B;">{{ serie.data.description }}</p>
+                     </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <h2 style="margin-bottom: 1.5rem; border-left: 4px solid var(--primary-color); padding-left: 1rem;">Materiais de Aula (PDFs)</h2>
+            <div class="feed-grid">
+                {% for aula in collections.aulas | reverse %}
+                <div class="card">
+                    {% if aula.data.image %}
+                    <img src="{{ aula.data.image }}" class="card-img-top" alt="{{ aula.data.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h4>{{ aula.data.title }}</h4>
+                        <p style="font-size: 0.85rem; margin-bottom: 1rem;">{{ aula.data.description }}</p>
+                        {% if aula.data.pdf %}
+                        <a href="{{ aula.data.pdf }}" target="_blank" class="btn btn-outline" style="width:100%; margin-top:auto;">BAIXAR MATERIAL ↓</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
