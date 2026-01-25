@@ -1,8 +1,8 @@
 ---
-title: O maior teste de todos os tempos222
-author: Arthur HS
-date: 2026-01-25T03:13:00.000-03:00
-image: /assets/uploads/img-20251005-wa0246.jpg
+title: "O Espelho da Alma: A Beleza como Caminho para Deus"
+author: Adri Stephany
+date: 2026-01-25T13:59:00.000-03:00
+image: /assets/uploads/captura-de-tela-2026-01-25-140030.png
 tags:
   - Artigo
 description: Um texto lindo testando tudo
