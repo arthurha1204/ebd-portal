@@ -1,138 +1,33 @@
 ---
 layout: base.njk
-title: EBD Juv Recon - Oficial
+title: Início
 ---
-
-<main id="home-view" class="page-view active">
-    <section class="hero">
-        <img src="/assets/marca-dagua.png" class="hero-watermark" alt="Marca D'água">
-        <div class="container">
-            <div style="max-width: 600px;">
-                <h1>Ensinar. Instruir. Aprender.</h1>
-                <p style="font-size: 1.15rem; margin-bottom: 2rem; opacity: 0.9; font-weight: 300;">
-                    Portal de conteúdo da Escola Bíblica Dominical da Juventude da Catedral da Reconciliação. Forjando uma geração firmada nas sagradas escrituras!
-                </p>
-                <a href="#" onclick="showPage('studies')" class="btn btn-accent">Explorar Conteúdos</a>
-            </div>
-        </div>
-    </section>
-
-    <div class="container main-grid">
-        <section>
-            <h2 style="border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 2rem;">Últimas Atualizações</h2>
-            <div id="unified-feed" class="feed-grid">
-                </div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <button onclick="showPage('studies')" class="btn btn-primary">VER MAIS ESTUDOS &rarr;</button>
-            </div>
-        </section>
-
-        <aside>
-            <div class="sidebar-widget">
-                <h3>Categorias</h3>
-                <ul class="cat-list">
-                    <li><a href="#" onclick="filterByTag('Teologia')">Teologia</a></li>
-                    <li><a href="#" onclick="filterByTag('Vida Cristã')">Vida Cristã</a></li>
-                    <li><a href="#" onclick="filterByTag('Novo Testamento')">Novo Testamento</a></li>
-                    <li><a href="#" onclick="filterByTag('Antigo Testamento')">Antigo Testamento</a></li>
-                    <li><a href="#" onclick="filterByTag('Apologética')">Apologética</a></li>
-                </ul>
-            </div>
-            
-            <div class="sidebar-widget">
-                <h3>Horários</h3>
-                <div style="margin-bottom: 1rem;">
-                    <strong>Domingo, 17h40</strong><br>
-                    <span style="font-size: 0.85rem; color: var(--text-muted);">EBD Juv Recon. <br>Capela Dr. Marcílio<br> Catedral da Reconciliação - IECB</span>
-                </div>
-            </div>
-
-            <div class="sidebar-widget">
-                <h3>Última Pregação</h3>
-                <div id="latest-video-container">
-                    <span style="font-size: 0.8rem; color: #888;">Carregando vídeo...</span>
-                </div>
-                <div style="margin-top: 1rem; text-align: center;">
-                        <a href="https://www.youtube.com/@parareconciliar/streams" target="_blank" class="btn btn-outline" style="font-size: 0.75rem; padding: 0.5rem 1rem; width: 100%;">VER CANAL COMPLETO</a>
-                </div>
-            </div>
-        </aside>
+<section class="hero">
+    <img src="/assets/marca-dagua.png" class="hero-watermark">
+    <div class="container">
+        <h1>Ensinar. Instruir. Aprender.</h1>
+        <p>Portal da Escola Bíblica Dominical Juv Recon.</p>
     </div>
+</section>
 
-    <section class="about-section">
-        <div class="container">
-            <div class="bible-verse-box">
-                <p class="bible-verse-text">"Toda a Escritura é inspirada por Deus e útil para o ensino, para a repreensão, para a correção e para a instrução na justiça, para que o homem de Deus seja apto e plenamente preparado para toda boa obra."</p>
-                <span class="bible-verse-ref">2 TIMÓTEO 3:16-17</span>
-            </div>
-
-            <div class="about-split-layout">
-                <div class="story-video-container">
-                    <video autoplay loop muted playsinline>
-                        <source src="/assets/story.mp4" type="video/mp4">
-                        Seu navegador não suporta vídeos HTML5.
-                    </video>
+<div class="container main-grid">
+    <section>
+        <h2 class="section-header">Últimas Atualizações</h2>
+        <div class="feed-grid">
+            {%- for post in collections.artigos | reverse -%}
+            <div class="card">
+                <div style="height: 200px; position: relative; overflow:hidden;">
+                    <span class="content-type-badge type-article">ARTIGO</span>
+                    <img src="{{ post.data.image }}" style="width:100%; height:100%; object-fit:cover;">
                 </div>
-
-                <div class="about-content">
-                    <h2>Quem somos?</h2>
-                    <p>A EBD Juv Recon é uma comunidade viva de discípulos comprometidos em viver o Evangelho de forma integral. Nosso propósito é claro: não apenas informar a mente, mas transformar o coração através da exposição fiel das Escrituras para a nossa geração.</p>
-                    
-                    <div class="benefits-list">
-                        <div class="benefit-item">
-                            <div class="benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
-                            <div class="benefit-text"><h4>Muito Mais que Palestra</h4><p>Aqui ninguém dorme ouvindo monólogo. Nossas aulas são espaços vivos de diálogo, onde sua dúvida é respeitada e o debate é incentivado.</p></div>
-                        </div>
-                        <div class="benefit-item">
-                            <div class="benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></div>
-                            <div class="benefit-text"><h4>Bíblia Aberta, Mente Ativa</h4><p>Não ficamos no raso. Encaramos os textos difíceis, a história e o contexto original para entender o que Deus realmente disse, sem filtros.</p></div>
-                        </div>
-                        <div class="benefit-item">
-                            <div class="benefit-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
-                            <div class="benefit-text"><h4>Fé para a Vida Real</h4><p>O que aprendemos domingo de manhã precisa fazer sentido na segunda-feira. Conectamos a teologia com sua faculdade, trabalho e dilemas reais.</p></div>
-                        </div>
-                    </div>
+                <div class="card-content">
+                    <h3 style="font-size: 1.2rem;">{{ post.data.title }}</h3>
+                    <p style="font-size: 0.85rem; color: #64748B;">{{ post.data.date | dateFilter }} • {{ post.data.author }}</p>
+                    <a href="{{ post.url }}" class="btn btn-outline" style="width: 100%; margin-top: auto;">LER ARTIGO</a>
                 </div>
             </div>
-
-            <div class="stats-container">
-                <div class="stats-grid">
-                    <div class="stat-box"><span class="stat-number" id="classCounter">+80</span><span class="stat-label">Aulas Ministradas</span></div>
-                    <div class="stat-box"><span class="stat-number" id="seriesCounter">+16</span><span class="stat-label">Séries Abordadas</span></div>
-                </div>
-                <span class="stat-sub">E CADA VEZ AUMENTANDO! 🚀</span>
-                <div class="stat-footer"><span class="stat-highlight">e o melhor, É GRATUITO!</span><p class="stat-location">Domingo, 17:40h na Capela Dr Marcílio<br>Catedral da Reconciliação - IECB</p></div>
-            </div>
-
-            <div class="gallery-section">
-                <div class="gallery-title">Nossa Galeria</div>
-                <div class="carousel-container">
-                    <div class="carousel-track">
-                        <div class="carousel-slide"><img src="/assets/galeria-1.jpg"></div>
-                        <div class="carousel-slide"><img src="/assets/galeria-2.jpg"></div>
-                        <div class="carousel-slide"><img src="/assets/galeria-3.jpg"></div>
-                        <div class="carousel-slide"><img src="/assets/galeria-4.jpg"></div>
-                        <div class="carousel-slide"><img src="/assets/galeria-5.jpg"></div>
-                        <div class="carousel-slide"><img src="/assets/galeria-1.jpg"></div>
-                        <div class="carousel-slide"><img src="/assets/galeria-2.jpg"></div>
-                        <div class="carousel-slide"><img src="/assets/galeria-3.jpg"></div>
-                        <div class="carousel-slide"><img src="/assets/galeria-4.jpg"></div>
-                        <div class="carousel-slide"><img src="/assets/galeria-5.jpg"></div>
-                    </div>
-                </div>
-            </div>
+            {%- endfor -%}
         </div>
     </section>
-</main>
-
-<main id="studies-view" class="page-view">
-   </main>
-
-<main id="article-detail-view" class="page-view">
-   </main>
-
-<main id="library-view" class="page-view">
-   </main>
-
-<main id="search-view" class="page-view">
-   </main>
+    
+    </div>
