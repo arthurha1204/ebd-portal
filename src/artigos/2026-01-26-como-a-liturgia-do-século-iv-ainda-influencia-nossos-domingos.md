@@ -1,7 +1,7 @@
 ---
 title: "Como a Liturgia do Século IV Ainda Influencia Nossos Domingos "
 author: Arthur HS
-date: 2026-01-26T11:55:00.000-03:00
+date: 2026-01-26T12:21:00.000-03:00
 image: /assets/uploads/canterburycathedralthrone.jpg
 tags:
   - Artigo
