@@ -1,4 +1,5 @@
 {
   "layout": "layouts/post.njk",
-  "tags": ["aula"]
+  "tags": ["aula"],
+  "permalink": "/aulas/{{ page.fileSlug }}/index.html"
 }

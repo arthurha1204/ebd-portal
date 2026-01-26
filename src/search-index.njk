@@ -3,24 +3,31 @@ permalink: /search-index.json
 eleventyExcludeFromCollections: true
 ---
 [
-    {% for item in collections.all %}
-    {% if item.data.title %}
-    {
-        "title": "{{ item.data.title | replace('"', '') | safe }}",
-        "author": "{{ item.data.author | default('Equipe') }}",
-        "date": "{{ item.date | postDate }}",
-        "url": "{{ item.url }}",
-        
-        {# Lógica de Imagem: Tenta 'image', se não tiver tenta 'cover' (livro), se não tiver usa padrão #}
-        "image": "{{ item.data.image or item.data.cover or '/assets/fundo.jpg' }}",
-        
-        "description": "{{ item.data.description or item.data.resumo | default('') | replace('"', '') | safe }}",
-        
-        "tags": {{ item.data.tags | dump | safe }},
-        
-        {# Lógica Vital para o Filtro de Tipo funcionar #}
-        "type": "{% if '/videos/' in item.url %}video{% elif '/aulas/' in item.url %}aula{% elif '/livros/' in item.url %}livro{% elif '/series/' in item.url %}serie{% else %}artigo{% endif %}"
-    }{% if not loop.last %},{% endif %}
+{% set comma = joiner(",") %}
+{% for post in collections.all %}
+
+    {# 1. DEFINE SE É CONTEÚDO REAL (Para não indexar páginas de sistema) #}
+    {% set isContent = false %}
+    {% if '/artigos/' in post.url or '/aulas/' in post.url or '/videos/' in post.url or '/livros/' in post.url or '/series/' in post.url %}
+        {% set isContent = true %}
     {% endif %}
-    {% endfor %}
+
+    {# 2. SÓ GERA O JSON SE FOR CONTEÚDO VÁLIDO #}
+    {% if isContent and post.data.title and post.url %}
+    {{ comma() }}
+    {
+        "title": {{ post.data.title | dump | safe }},
+        "url": "{{ post.url }}",
+        "date": "{{ post.date | postDate }}",
+        "author": "{{ post.data.author | default('Equipe EBD') }}",
+        
+        {# AQUI ESTAVA O ERRO: Adicionamos default([]) para nunca ficar vazio #}
+        "tags": {{ post.data.tags | default([]) | dump | safe }},
+        
+        "type": "{% if '/videos/' in post.url %}video{% elif '/aulas/' in post.url %}aula{% elif '/artigos/' in post.url %}artigo{% elif '/livros/' in post.url %}livro{% elif '/series/' in post.url %}serie{% else %}outro{% endif %}",
+        "image": "{{ post.data.image or post.data.cover or '/assets/fundo.jpg' }}",
+        "resumo": {{ (post.data.description or post.data.resumo or "") | dump | safe }}
+    }
+    {% endif %}
+{% endfor %}
 ]

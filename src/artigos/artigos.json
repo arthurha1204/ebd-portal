@@ -1,4 +1,5 @@
 {
   "layout": "layouts/post.njk",
-  "tags": ["artigo"]
+  "tags": ["artigo"],
+  "permalink": "/artigos/{{ page.fileSlug }}/index.html"
 }

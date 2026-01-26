@@ -23,61 +23,74 @@ title: Início
             <h2 style="border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 2rem;">Últimas Atualizações</h2>
             
             <div id="unified-feed" class="feed-grid">
+                {# Variável para contar apenas posts válidos #}
+                {% set contador = 0 %}
+                
                 {% for post in collections.all | reverse %}
-                    {% if loop.index0 < 6 and post.data.title %}
-                    <article class="card">
-                        <div style="height: 200px; position: relative; overflow:hidden;">
-                            
-                            {% set badgeColor = "var(--primary-color)" %}
-                            {% set typeLabel = "CONTEÚDO" %}
-                            
-                            {% if '/videos/' in post.url %} 
-                                {% set badgeColor = "#ef4444" %} {% set typeLabel = "VÍDEO" %}
-                            {% elif '/aulas/' in post.url %} 
-                                {% set badgeColor = "var(--accent-color)" %} {% set typeLabel = "AULA" %}
-                            {% elif '/artigos/' in post.url %} 
-                                {% set badgeColor = "var(--primary-color)" %} {% set typeLabel = "ARTIGO" %}
-                            {% elif '/livros/' in post.url %} 
-                                {% set badgeColor = "#d97706" %} {% set typeLabel = "LIVRO" %}
-                            {% elif '/series/' in post.url %} 
-                                {% set badgeColor = "#0267a7" %} {% set typeLabel = "SÉRIE" %}
-                            {% endif %}
-                            
-                            <span class="content-type-badge" style="background-color: {{ badgeColor }};">{{ typeLabel }}</span>
-                            
-                            {% if post.data.image %}
-                                <img src="{{ post.data.image }}" alt="{{ post.data.title }}" style="width:100%; height:100%; object-fit:cover;">
-                            {% elif post.data.cover %}
-                                <img src="{{ post.data.cover }}" alt="{{ post.data.title }}" style="width:100%; height:100%; object-fit:cover;">
-                            {% else %}
-                                <img src="/assets/fundo.jpg" alt="Capa Padrão" style="width:100%; height:100%; object-fit:cover;">
-                            {% endif %}
-                        </div>
-                        
-                        <div class="card-content">
-                            <div style="margin-bottom:0.5rem;">
-                                {% for tag in post.data.tags %}
-                                    {% if tag != 'post' and tag != 'artigo' and tag != 'aula' and tag != 'video' and tag != 'livro' and tag != 'serie' %}
-                                    <a href="/pesquisa/?tag={{ tag }}" class="tag">{{ tag }}</a>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
+                    
+                    {# FILTRO: Só entra se não for a própria página, se tiver título E se for de uma pasta de conteúdo #}
+                    {% if contador < 6 
+                          and post.url != page.url 
+                          and post.data.title 
+                          and ('/artigos/' in post.url or '/aulas/' in post.url or '/videos/' in post.url or '/livros/' in post.url or '/series/' in post.url) 
+                    %}
+                    
+                        {% set contador = contador + 1 %}
 
-                            <h3 style="font-size: 1.2rem; margin-top: 0.5rem; margin-bottom: 0.5rem; line-height: 1.3;">{{ post.data.title }}</h3>
+                        <article class="card">
+                            <div style="height: 200px; position: relative; overflow:hidden;">
+                                
+                                {% set badgeColor = "var(--primary-color)" %}
+                                {% set typeLabel = "CONTEÚDO" %}
+                                
+                                {% if '/videos/' in post.url %} 
+                                    {% set badgeColor = "#ef4444" %} {% set typeLabel = "VÍDEO" %}
+                                {% elif '/aulas/' in post.url %} 
+                                    {% set badgeColor = "var(--accent-color)" %} {% set typeLabel = "AULA" %}
+                                {% elif '/artigos/' in post.url %} 
+                                    {% set badgeColor = "var(--primary-color)" %} {% set typeLabel = "ARTIGO" %}
+                                {% elif '/livros/' in post.url %} 
+                                    {% set badgeColor = "#d97706" %} {% set typeLabel = "LIVRO" %}
+                                {% elif '/series/' in post.url %} 
+                                    {% set badgeColor = "#0267a7" %} {% set typeLabel = "SÉRIE" %}
+                                {% endif %}
+                                
+                                <span class="content-type-badge" style="background-color: {{ badgeColor }};">{{ typeLabel }}</span>
+                                
+                                {% if post.data.image %}
+                                    <img src="{{ post.data.image }}" alt="{{ post.data.title }}" style="width:100%; height:100%; object-fit:cover;">
+                                {% elif post.data.cover %}
+                                    <img src="{{ post.data.cover }}" alt="{{ post.data.title }}" style="width:100%; height:100%; object-fit:cover;">
+                                {% else %}
+                                    <img src="/assets/fundo.jpg" alt="Capa Padrão" style="width:100%; height:100%; object-fit:cover;">
+                                {% endif %}
+                            </div>
                             
-                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
-                                {{ post.date | postDate }} • {{ post.data.author }}
-                            </p>
-                            
-                            {% if post.data.description or post.data.resumo %}
-                            <p style="font-size: 0.9rem; margin-bottom: 1.5rem; color: #333; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
-                                {{ post.data.description or post.data.resumo }}
-                            </p>
-                            {% endif %}
-                            
-                            <a href="{{ post.url }}" class="btn btn-outline" style="width: 100%; margin-top: auto;">VER CONTEÚDO</a>
-                        </div>
-                    </article>
+                            <div class="card-content">
+                                <div style="margin-bottom:0.5rem;">
+                                    {% for tag in post.data.tags %}
+                                        {% if tag != 'post' and tag != 'artigo' and tag != 'aula' and tag != 'video' and tag != 'livro' and tag != 'serie' %}
+                                        <a href="/pesquisa/?tag={{ tag }}" class="tag">{{ tag }}</a>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+
+                                <h3 style="font-size: 1.2rem; margin-top: 0.5rem; margin-bottom: 0.5rem; line-height: 1.3;">{{ post.data.title }}</h3>
+                                
+                                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+                                    {{ post.date | postDate }} • {{ post.data.author }}
+                                </p>
+                                
+                                {% if post.data.description or post.data.resumo %}
+                                <p style="font-size: 0.9rem; margin-bottom: 1.5rem; color: #333; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                                    {{ post.data.description or post.data.resumo }}
+                                </p>
+                                {% endif %}
+                                
+                                <a href="{{ post.url }}" class="btn btn-outline" style="width: 100%; margin-top: auto;">VER CONTEÚDO</a>
+                            </div>
+                        </article>
+
                     {% endif %}
                 {% endfor %}
             </div>

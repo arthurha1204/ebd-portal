@@ -295,6 +295,20 @@
 
     {{ content | safe }}
 
+    <section class="newsletter-section">
+        <div class="container newsletter-content">
+            <div class="newsletter-text">
+                <h2>Não perca nenhum conteúdo</h2>
+                <p>Receba avisos das novas aulas, artigos e vídeos diretamente no seu e-mail. Sem spam, apenas edificação.</p>
+            </div>
+            
+            <form class="newsletter-form" name="newsletter" method="POST" netlify onsubmit="alert('Inscrição confirmada! Em breve traremos novidades.');">
+                <input type="email" name="email" placeholder="Seu melhor e-mail" required>
+                <button type="submit" class="btn btn-primary">INSCREVER-SE</button>
+            </form>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
             <div class="footer-grid">

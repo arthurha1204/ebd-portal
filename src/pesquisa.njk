@@ -5,116 +5,178 @@ title: Pesquisar
 
 <main style="padding-top: 3rem; min-height: 80vh;">
     <div class="container">
-        <h1 style="margin-bottom: 2rem; font-family: 'Inter', sans-serif;">Pesquisar Conteúdo</h1>
+        <h1 style="margin-bottom: 2rem;">Pesquisar Conteúdo</h1>
 
-        <div style="background: #fff; padding: 1.5rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-            <div>
-                <label style="display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem;">Buscar termo</label>
-                <input type="text" id="searchInput" placeholder="Título, autor..." style="width: 100%; padding: 0.6rem; border: 1px solid #cbd5e1; border-radius: 4px;">
-            </div>
-            <div>
-                <label style="display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem;">Filtrar por Tag</label>
-                <select id="tagSelect" style="width: 100%; padding: 0.6rem; border: 1px solid #cbd5e1; border-radius: 4px;">
-                    <option value="">Todas as Tags</option>
-                </select>
-            </div>
-            <div>
-                <label style="display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem;">Tipo de Conteúdo</label>
-                <select id="typeSelect" style="width: 100%; padding: 0.6rem; border: 1px solid #cbd5e1; border-radius: 4px;">
-                    <option value="">Todos</option>
-                    <option value="artigo">Artigos</option>
-                    <option value="aula">Aulas</option>
-                    <option value="video">Vídeos</option>
-                    <option value="livro">Livros</option>
-                </select>
+        <div style="background: #fff; padding: 1.5rem; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                
+                <div>
+                    <label style="font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">Buscar termo</label>
+                    <input type="text" id="searchInput" placeholder="Título, autor..." 
+                           style="width: 100%; padding: 0.6rem; border: 1px solid #cbd5e1; border-radius: 4px; font-family: 'Inter', sans-serif;">
+                </div>
+
+                <div>
+                    <label style="font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">Filtrar por Tag</label>
+                    <select id="tagFilter" style="width: 100%; padding: 0.6rem; border: 1px solid #cbd5e1; border-radius: 4px; background: #fff;">
+                        <option value="">Todas as Tags</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 0.5rem;">Tipo de Conteúdo</label>
+                    <select id="typeFilter" style="width: 100%; padding: 0.6rem; border: 1px solid #cbd5e1; border-radius: 4px; background: #fff;">
+                        <option value="">Todos</option>
+                        <option value="artigo">Artigos</option>
+                        <option value="aula">Aulas</option>
+                        <option value="video">Vídeos</option>
+                        <option value="livro">Livros</option>
+                        <option value="serie">Séries</option>
+                    </select>
+                </div>
             </div>
         </div>
 
-        <div id="resultsInfo" style="margin-bottom: 1rem; color: #666;">Carregando...</div>
+        <div id="results-container" class="feed-grid">
+            <p id="loading-msg" style="color: #666;">Carregando banco de dados...</p>
+        </div>
         
-        <div id="resultsGrid" class="feed-grid"></div>
+        <p id="no-results" style="display:none; text-align: center; color: #666; margin-top: 2rem;">
+            Nenhum resultado encontrado para sua busca.
+        </p>
+
     </div>
-</main>
 
-<script>
-    let allContent = [];
+    <script>
+        let searchData = [];
 
-    async function initSearch() {
-        // Pega o índice JSON
-        const response = await fetch('/search-index.json');
-        allContent = await response.json();
-        
-        // Popula as tags
-        const allTags = new Set();
-        allContent.forEach(item => {
-            if(item.tags) item.tags.forEach(t => allTags.add(t));
-        });
-        const tagSelect = document.getElementById('tagSelect');
-        Array.from(allTags).sort().forEach(tag => {
-            if(tag !== 'post' && tag !== 'artigo' && tag !== 'aula' && tag !== 'video') {
-                const opt = document.createElement('option');
-                opt.value = tag;
-                opt.innerText = tag;
-                tagSelect.appendChild(opt);
+        // 1. CARREGAR DADOS
+        async function loadSearchIndex() {
+            try {
+                const response = await fetch('/search-index.json');
+                if (!response.ok) throw new Error("Erro HTTP: " + response.status);
+                
+                searchData = await response.json();
+                
+                // Popula o Dropdown de Tags
+                populateTags();
+
+                // Verifica se tem tag na URL (ex: ?tag=Teologia)
+                const urlParams = new URLSearchParams(window.location.search);
+                const tagParam = urlParams.get('tag');
+                
+                if(tagParam) {
+                    document.getElementById('tagFilter').value = tagParam;
+                    runSearch(); // Roda a busca imediatamente
+                } else {
+                    displayResults(searchData); // Mostra tudo se não tiver filtro
+                }
+
+                document.getElementById('loading-msg').style.display = 'none';
+
+            } catch (error) {
+                console.error("Erro na busca:", error);
+                document.getElementById('loading-msg').innerHTML = "Erro ao carregar sistema de busca. Tente recarregar a página.";
             }
-        });
-
-        // Verifica URL para filtro direto (?tag=Teologia)
-        const urlParams = new URLSearchParams(window.location.search);
-        const tagParam = urlParams.get('tag');
-        if(tagParam) {
-            document.getElementById('tagSelect').value = tagParam;
         }
 
-        filterResults();
-    }
+        // 2. POPULAR TAGS (Dropdown)
+        function populateTags() {
+            const allTags = new Set();
+            searchData.forEach(item => {
+                if (item.tags) {
+                    item.tags.forEach(tag => {
+                        // Filtra tags de sistema
+                        if(!['post','artigo','aula','video','livro','serie'].includes(tag.toLowerCase())) {
+                            allTags.add(tag);
+                        }
+                    });
+                }
+            });
 
-    function filterResults() {
-        const term = document.getElementById('searchInput').value.toLowerCase();
-        const tag = document.getElementById('tagSelect').value;
-        const type = document.getElementById('typeSelect').value;
+            const select = document.getElementById('tagFilter');
+            // Ordena alfabeticamente
+            Array.from(allTags).sort().forEach(tag => {
+                const option = document.createElement('option');
+                option.value = tag;
+                option.textContent = tag;
+                select.appendChild(option);
+            });
+        }
 
-        const filtered = allContent.filter(item => {
-            const matchTerm = item.title.toLowerCase().includes(term) || item.author.toLowerCase().includes(term);
-            const matchTag = tag === "" || (item.tags && item.tags.includes(tag));
-            const matchType = type === "" || item.url.includes(`/${type}s/`); 
-            return matchTerm && matchTag && matchType;
-        });
+        // 3. EXECUTAR FILTRO
+        function runSearch() {
+            const term = document.getElementById('searchInput').value.toLowerCase();
+            const tag = document.getElementById('tagFilter').value;
+            const type = document.getElementById('typeFilter').value;
 
-        renderResults(filtered);
-    }
+            const filtered = searchData.filter(item => {
+                // Filtro Texto
+                const matchText = !term || 
+                                  (item.title && item.title.toLowerCase().includes(term)) || 
+                                  (item.author && item.author.toLowerCase().includes(term)) ||
+                                  (item.resumo && item.resumo.toLowerCase().includes(term));
+                
+                // Filtro Tag
+                const matchTag = !tag || (item.tags && item.tags.includes(tag));
+                
+                // Filtro Tipo
+                const matchType = !type || (item.type === type);
 
-    function renderResults(items) {
-        const grid = document.getElementById('resultsGrid');
-        document.getElementById('resultsInfo').innerText = `${items.length} resultados encontrados.`;
-        grid.innerHTML = '';
+                return matchText && matchTag && matchType;
+            });
 
-        items.forEach(item => {
-            let label = "CONTEÚDO";
-            let badgeColor = "var(--primary-color)";
-            if(item.url.includes("/videos/")) { label = "VÍDEO"; badgeColor = "#ef4444"; }
-            else if(item.url.includes("/aulas/")) { label = "AULA"; badgeColor = "var(--accent-color)"; }
+            displayResults(filtered);
+        }
 
-            const html = `
-                <div class="card">
-                    <div style="height: 180px; position: relative; overflow:hidden;">
-                        <span style="position: absolute; top: 10px; left: 10px; background: ${badgeColor}; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase;">${label}</span>
+        // 4. RENDERIZAR CARDS
+        function displayResults(items) {
+            const container = document.getElementById('results-container');
+            const noResults = document.getElementById('no-results');
+            
+            container.innerHTML = '';
+            
+            if (items.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            } else {
+                noResults.style.display = 'none';
+            }
+
+            items.forEach(item => {
+                // Cores dos Badges
+                let badgeColor = "var(--primary-color)";
+                let typeLabel = "CONTEÚDO";
+                if(item.type === 'video') { badgeColor = "#ef4444"; typeLabel = "VÍDEO"; }
+                else if(item.type === 'aula') { badgeColor = "var(--accent-color)"; typeLabel = "AULA"; }
+                else if(item.type === 'livro') { badgeColor = "#d97706"; typeLabel = "LIVRO"; }
+                else if(item.type === 'serie') { badgeColor = "#0267a7"; typeLabel = "SÉRIE"; }
+
+                const html = `
+                <article class="card">
+                    <div style="height: 200px; position: relative; overflow:hidden;">
+                        <span class="content-type-badge" style="background-color: ${badgeColor};">${typeLabel}</span>
                         <img src="${item.image}" style="width:100%; height:100%; object-fit:cover;">
                     </div>
-                    <div class="card-body">
-                        <h3 style="font-size: 1.1rem; margin-top: 0.5rem;">${item.title}</h3>
-                        <p style="font-size: 0.85rem; color: #64748B;">${item.date} • ${item.author}</p>
+                    <div class="card-content">
+                        <h3 style="font-size: 1.1rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">${item.title}</h3>
+                        <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 1rem;">
+                            ${item.date} • ${item.author}
+                        </p>
                         <a href="${item.url}" class="btn btn-outline" style="width: 100%; margin-top: auto;">VER CONTEÚDO</a>
                     </div>
-                </div>
-            `;
-            grid.innerHTML += html;
-        });
-    }
+                </article>
+                `;
+                container.innerHTML += html;
+            });
+        }
 
-    document.getElementById('searchInput').addEventListener('input', filterResults);
-    document.getElementById('tagSelect').addEventListener('change', filterResults);
-    document.getElementById('typeSelect').addEventListener('change', filterResults);
+        // Listeners
+        document.getElementById('searchInput').addEventListener('input', runSearch);
+        document.getElementById('tagFilter').addEventListener('change', runSearch);
+        document.getElementById('typeFilter').addEventListener('change', runSearch);
 
-    initSearch();
-</script>
+        // Iniciar
+        document.addEventListener('DOMContentLoaded', loadSearchIndex);
+    </script>
+</main>

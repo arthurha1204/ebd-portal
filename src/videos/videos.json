@@ -1,4 +1,5 @@
 {
   "layout": "layouts/post.njk",
-  "tags": ["video"]
+  "tags": ["video"],
+  "permalink": "/videos/{{ page.fileSlug }}/index.html"
 }

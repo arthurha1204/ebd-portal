@@ -1,4 +1,5 @@
 {
   "layout": "layouts/post.njk",
-  "tags": ["livro"]
+  "tags": ["livro"],
+  "permalink": "/livros/{{ page.fileSlug }}/index.html"
 }

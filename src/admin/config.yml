@@ -47,17 +47,22 @@ collections:
       # Relação com Séries
       - {label: "Série Pertencente", name: "serie", widget: "relation", collection: "series", search_fields: ["title"], value_field: "title", required: false, hint: "Selecione a série para agrupar esta aula"}
 
-  # 3. SÉRIES
+  # 3. SÉRIES (ATUALIZADO COM CAPA E DATA)
   - name: "series"
     label: "Séries de Estudos"
     folder: "src/series"
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Título da Série", name: "title", widget: "string"}
-      - {label: "Sigla (Ex: GEN, ROM)", name: "sigla", widget: "string"}
+      # ADICIONADO: Data para ordenação correta no feed
+      - {label: "Data de Início", name: "date", widget: "datetime"} 
+      # ADICIONADO: Campo de Imagem que você pediu
+      - {label: "Imagem de Capa", name: "image", widget: "image", required: true}
+      - {label: "Sigla (Ex: GEN, ROM)", name: "sigla", widget: "string", required: false}
       - {label: "Cor de Destaque", name: "color", widget: "color", default: "#0267a7", required: false}
       # Tag Geral (Usada para agrupar no código)
-      - {label: "Tag de Agrupamento", name: "tag_serie", widget: "string", hint: "Tag técnica usada para puxar as aulas (Ex: romanos)"}
+      - {label: "Tag de Agrupamento", name: "tag_serie", widget: "string", required: false, hint: "Tag técnica usada para puxar as aulas (Ex: romanos)"}
       # Tags de Busca (Novo)
       - {label: "Tags (Para Pesquisa)", name: "tags", widget: "list", default: ["Série"], hint: "Tags para esta série aparecer na busca por assunto"}
       - {label: "Descrição da Série", name: "description", widget: "text"}
@@ -67,6 +72,7 @@ collections:
     label: "Vídeos (Curadoria)"
     folder: "src/videos"
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Título do Vídeo", name: "title", widget: "string"}
       - {label: "Canal/Autor", name: "author", widget: "string"}
@@ -80,10 +86,11 @@ collections:
     label: "Livros Recomendados"
     folder: "src/livros"
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Nome do Livro", name: "title", widget: "string"}
       - {label: "Autor do Livro", name: "author", widget: "string"}
       - {label: "Capa do Livro", name: "cover", widget: "image"}
       - {label: "Breve Resumo (Por que ler?)", name: "resumo", widget: "text"}
       - {label: "Link Amazon", name: "amazonLink", widget: "string"}
-      - {label: "Tags (Assuntos)", name: "tags", widget: "list", default: ["Livro, Leitura"]}
+      - {label: "Tags (Assuntos)", name: "tags", widget: "list", default: ["Livro", "Leitura"]}

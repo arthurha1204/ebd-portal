@@ -2,11 +2,89 @@
 layout: base.njk
 ---
 
-<main style="padding-top: 3rem; min-height: 80vh;">
-    <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
-        
-        <a href="javascript:history.back()" class="btn btn-outline" style="margin-bottom: 2rem; padding: 0.5rem 1rem; font-size: 0.8rem;">&larr; Voltar</a>
+<style>
+    /* Container focado para leitura */
+    .read-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
 
+    /* Tira o fundo preto trocando a tag header por essa classe */
+    .article-head {
+        text-align: center; 
+        margin-bottom: 3rem; 
+        background: transparent !important; /* Força transparência */
+        color: #141414 !important; /* Força texto escuro */
+    }
+
+    /* Imagem de Capa */
+    .article-cover {
+        width: 100%;
+        height: auto;
+        max-height: 450px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+
+    /* Tags bonitinhas */
+    .article-tags {
+        display: flex; 
+        justify-content: center; 
+        gap: 0.5rem; 
+        margin-bottom: 1rem; 
+        flex-wrap: wrap;
+    }
+
+    /* Tipografia do Texto (Merriweather) */
+    .article-body {
+        font-family: 'Merriweather', serif;
+        font-size: 1.15rem;
+        line-height: 1.9;
+        color: #333;
+        margin-bottom: 4rem;
+        text-align: left; /* Alinhamento natural de leitura */
+    }
+    
+    /* Formatação interna do texto */
+    .article-body p { margin-bottom: 1.5rem; }
+    .article-body h2 { 
+        font-family: 'Inter', sans-serif; 
+        font-size: 1.8rem; 
+        color: #141414; 
+        margin-top: 2.5rem; 
+        margin-bottom: 1rem; 
+        font-weight: 700;
+    }
+    .article-body blockquote {
+        border-left: 4px solid #0267a7;
+        padding-left: 1.5rem;
+        margin: 2rem 0;
+        font-style: italic;
+        color: #555;
+    }
+    .article-body img { max-width: 100%; height: auto; border-radius: 8px; margin: 2rem 0; }
+
+    /* Layout Específico para Livros */
+    .book-layout { display: grid; grid-template-columns: 280px 1fr; gap: 3rem; align-items: start; margin-bottom: 4rem; }
+    @media (max-width: 768px) {
+        .book-layout { grid-template-columns: 1fr !important; justify-items: center; text-align: center; }
+        .book-layout > div:first-child { max-width: 200px; margin: 0 auto; }
+    }
+</style>
+
+<main style="padding-top: 3rem; min-height: 80vh;">
+    <div class="read-container">
+        
+        <a href="javascript:history.back()" class="btn btn-outline" style="margin-bottom: 2rem; padding: 0.5rem 1rem; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+            <span>&larr;</span> Voltar
+        </a>
+
+        {# ========================================== #}
+        {# CENÁRIO 1: É UM LIVRO (Amazon Link)        #}
+        {# ========================================== #}
         {% if amazonLink %}
         <div class="book-layout">
             <div style="box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);">
@@ -16,10 +94,10 @@ layout: base.njk
             </div>
 
             <div>
-                <span class="tag tag-blue" style="margin-bottom: 1rem;">Recomendação</span>
-                <h1 style="font-size: 2.5rem; line-height: 1.1; margin-bottom: 0.5rem; color: var(--primary-color);">{{ title }}</h1>
-                <h3 style="font-size: 1.2rem; font-weight: 400; color: var(--text-muted); margin-bottom: 2rem;">
-                    por <span style="color: var(--primary-color); font-weight: 600;">{{ author }}</span>
+                <span class="tag tag-blue" style="margin-bottom: 1rem; display:inline-block;">Recomendação</span>
+                <h1 style="font-size: 2.5rem; line-height: 1.1; margin-bottom: 0.5rem; color: #141414;">{{ title }}</h1>
+                <h3 style="font-size: 1.2rem; font-weight: 400; color: #64748B; margin-bottom: 2rem;">
+                    por <span style="color: #141414; font-weight: 600;">{{ author }}</span>
                 </h3>
 
                 <div style="margin-bottom: 2rem;">
@@ -29,100 +107,89 @@ layout: base.njk
                     </p>
                 </div>
 
-                <a href="{{ amazonLink }}" target="_blank" class="btn btn-amazon">
-                    Comprar na Amazon ↗
+                <a href="{{ amazonLink }}" target="_blank" class="btn btn-amazon" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                    Comprar na Amazon <span>↗</span>
                 </a>
             </div>
         </div>
 
-        <style>
-            .book-layout { display: grid; grid-template-columns: 300px 1fr; gap: 3rem; align-items: start; margin-bottom: 4rem; }
-            @media (max-width: 768px) {
-                .book-layout { grid-template-columns: 1fr !important; justify-items: center; text-align: center; }
-                .book-layout > div:first-child { max-width: 200px; margin: 0 auto; }
-            }
-        </style>
-
+        {# ========================================== #}
+        {# CENÁRIO 2: ARTIGO ou AULA (O Padrão)       #}
+        {# ========================================== #}
         {% else %}
         
+            <div class="article-head">
+                
+                {% if image %}
+                <img src="{{ image }}" class="article-cover" alt="{{ title }}">
+                {% endif %}
+
+                <div class="article-tags">
+                     {% for tag in tags %}
+                        {# Filtro para não mostrar tags técnicas #}
+                        {% if tag != "post" and tag != "artigo" and tag != "aula" and tag != "video" and tag != "serie" and tag != "livro" %}
+                        <a href="/pesquisa/?tag={{ tag }}" class="tag">{{ tag }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <h1 style="font-size: 2.5rem; line-height: 1.2; color: #141414; margin-bottom: 1rem;">
+                    {{ title }}
+                </h1>
+
+                <div style="color: #64748B; font-family: 'Inter', sans-serif; font-size: 0.95rem;">
+                    Por <strong style="color: #141414;">{{ author }}</strong> • {{ date | postDate }}
+                </div>
+            </div>
+
             {% if youtubeLink %}
-            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-bottom: 2rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-bottom: 3rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);">
                 <iframe src="{{ youtubeLink | replace('watch?v=', 'embed/') }}" 
                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
                         frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                 </iframe>
             </div>
-            
-            <header style="margin-bottom: 2rem; text-align: center;">
-                <div style="display: flex; gap: 10px; margin-bottom: 10px; justify-content: center;">
-                    <span class="tag tag-blue">Vídeo</span>
-                    {% for tag in tags %}{% if tag != 'video' %}<span class="tag">{{ tag }}</span>{% endif %}{% endfor %}
-                </div>
-                <h1 style="margin-bottom: 0.5rem;">{{ title }}</h1>
-                <p style="color: var(--text-muted); font-weight: 500;">Canal: {{ author }} • Publicado em: {{ date | postDate }}</p>
-            </header>
-            <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid #e2e8f0;">
-
-            {% else %}
-                <header style="text-align: center; margin-bottom: 3rem;">
-                    {% if image %}
-                    <img src="{{ image }}" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);" alt="Capa">
-                    {% endif %}
-                    
-                    <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
-                         {% for tag in tags %}
-                            {% if tag != "post" and tag != "artigo" and tag != "aula" %}
-                            <a href="/pesquisa/?tag={{ tag }}" class="tag">{{ tag }}</a>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-
-                    <h1 style="font-size: 2.5rem; line-height: 1.2; color: var(--primary-color);">{{ title }}</h1>
-
-                    <div style="color: var(--text-muted); margin-top: 1rem; font-family: 'Inter', sans-serif; font-size: 0.9rem;">
-                        Por <strong style="color: var(--primary-color);">{{ author }}</strong> • {{ date | postDate }}
-                    </div>
-                </header>
             {% endif %}
 
-            <article style="font-size: 1.15rem; line-height: 1.8; color: #333; margin-bottom: 4rem; text-align: justify;">
+            <article class="article-body">
                 {{ content | safe }}
 
                 {% if pdf %}
                 <div style="background-color: #F8FAFC; border: 2px dashed #CBD5E1; border-radius: 8px; padding: 2rem; text-align: center; margin-top: 3rem;">
-                    <h3 style="margin-bottom: 0.5rem; color: var(--primary-color);">Material de Apoio</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
-                        Baixe o PDF com os slides e anotações utilizados nesta lição.
+                    <h3 style="margin-bottom: 0.5rem; color: #141414; font-family: 'Inter', sans-serif;">Material de Apoio</h3>
+                    <p style="font-size: 0.9rem; color: #64748B; margin-bottom: 1.5rem; font-family: 'Inter', sans-serif;">
+                        Baixe o PDF com os slides e anotações.
                     </p>
-                    <a href="{{ pdf }}" download class="btn btn-primary">
-                        <svg style="width:18px; height:18px; margin-right:8px; stroke:currentColor; fill:none; stroke-width:2; vertical-align:middle" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                        BAIXAR PDF
-                    </a>
+                    <a href="{{ pdf }}" download class="btn btn-primary">BAIXAR PDF</a>
                 </div>
                 {% endif %}
             </article>
 
-        {% endif %} <div style="border-top: 1px solid #e2e8f0; margin-top: 4rem; padding-top: 3rem;">
-            <h3 style="margin-bottom: 2rem; border-left: 4px solid var(--accent-color); padding-left: 1rem; font-family: 'Inter', sans-serif;">Veja Também</h3>
+        {% endif %} 
+        
+        <div style="border-top: 1px solid #e2e8f0; margin-top: 4rem; padding-top: 3rem;">
+            <h3 style="margin-bottom: 2rem; border-left: 4px solid #0267a7; padding-left: 1rem; font-family: 'Inter', sans-serif;">Veja Também</h3>
+            
             <div class="feed-grid">
+                {% set contador = 0 %}
                 {% for post in collections.all | reverse %}
-                    {% if loop.index0 < 3 and post.url != page.url and post.data.title %}
-                    <article class="card">
-                        <div style="height: 150px; position: relative; overflow:hidden;">
-                            {% set badgeColor = "var(--primary-color)" %} {% set typeLabel = "CONTEÚDO" %}
-                            {% if '/videos/' in post.url %} {% set badgeColor = "#ef4444" %} {% set typeLabel = "VÍDEO" %}
-                            {% elif '/aulas/' in post.url %} {% set badgeColor = "var(--accent-color)" %} {% set typeLabel = "AULA" %}
-                            {% elif '/livros/' in post.url %} {% set badgeColor = "#d97706" %} {% set typeLabel = "LIVRO" %}
-                            {% endif %}
-                            
-                            <span class="content-type-badge" style="background-color: {{ badgeColor }};">{{ typeLabel }}</span>
-                            <img src="{{ post.data.image or post.data.cover or '/assets/fundo.jpg' }}" style="width:100%; height:100%; object-fit:cover;">
-                        </div>
-                        <div class="card-content">
-                            <h4 style="font-size: 1rem; margin: 0.5rem 0;">{{ post.data.title }}</h4>
-                            <a href="{{ post.url }}" class="btn btn-outline" style="width: 100%; margin-top: auto; font-size: 0.8rem;">VER</a>
-                        </div>
-                    </article>
+                    {% if contador < 3 and post.url != page.url and post.data.title and ('/artigos/' in post.url or '/aulas/' in post.url or '/videos/' in post.url) %}
+                        {% set contador = contador + 1 %}
+                        <article class="card">
+                            <div style="height: 150px; position: relative; overflow:hidden;">
+                                {% set badgeColor = "#141414" %} {% set typeLabel = "CONTEÚDO" %}
+                                {% if '/videos/' in post.url %} {% set badgeColor = "#ef4444" %} {% set typeLabel = "VÍDEO" %}
+                                {% elif '/aulas/' in post.url %} {% set badgeColor = "#0267a7" %} {% set typeLabel = "AULA" %}
+                                {% elif '/livros/' in post.url %} {% set badgeColor = "#d97706" %} {% set typeLabel = "LIVRO" %}
+                                {% endif %}
+                                <span class="content-type-badge" style="background-color: {{ badgeColor }};">{{ typeLabel }}</span>
+                                <img src="{{ post.data.image or post.data.cover or '/assets/fundo.jpg' }}" style="width:100%; height:100%; object-fit:cover;">
+                            </div>
+                            <div class="card-content">
+                                <h4 style="font-size: 1rem; margin: 0.5rem 0;">{{ post.data.title }}</h4>
+                                <a href="{{ post.url }}" class="btn btn-outline" style="width: 100%; margin-top: auto; font-size: 0.8rem;">VER</a>
+                            </div>
+                        </article>
                     {% endif %}
                 {% endfor %}
             </div>
