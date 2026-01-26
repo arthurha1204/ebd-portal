@@ -25,7 +25,9 @@ title: Início
                     {% if loop.index0 < 4 %}
                     <article class="card">
                         {% if post.data.image %}
-                        <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="card-img-top">
+                        <div style="height: 200px; overflow: hidden;">
+                            <img src="{{ post.data.image }}" alt="{{ post.data.title }}" class="card-img-top" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
                         {% endif %}
                         <div class="card-body">
                             <span class="badge-soon" style="background:var(--primary-color); margin-left:0; width:fit-content; margin-bottom:0.5rem;">
@@ -51,12 +53,10 @@ title: Início
                 <h3>Categorias</h3>
                 <ul class="cat-list">
                     {% for tag in collections.tagList %}
-                        <li><a href="/tags/{{ tag | slug }}">{{ tag }}</a></li>
+                        <li><a href="/pesquisa/?tag={{ tag }}">{{ tag }}</a></li>
                     {% endfor %}
                     
-                    {% if collections.tagList | length > 10 %}
-                        <li><a href="/tags/" style="font-weight:700; color:var(--accent-color)">Ver Todas as Tags &rarr;</a></li>
-                    {% endif %}
+                    <li><a href="/pesquisa/" style="font-weight:700; color:var(--accent-color)">Ver Todas &rarr;</a></li>
                 </ul>
             </div>
 

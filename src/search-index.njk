@@ -1,0 +1,18 @@
+---
+permalink: /search-index.json
+eleventyExcludeFromCollections: true
+---
+[
+    {% for item in collections.all %}
+    {% if item.data.title %}
+    {
+        "title": "{{ item.data.title | replace('"', '') }}",
+        "author": "{{ item.data.author | default('Equipe') }}",
+        "date": "{{ item.date | postDate }}",
+        "url": "{{ item.url }}",
+        "image": "{{ item.data.image | default('/assets/fundo.jpg') }}",
+        "tags": {{ item.data.tags | dump | safe }}
+    }{% if not loop.last %},{% endif %}
+    {% endif %}
+    {% endfor %}
+]

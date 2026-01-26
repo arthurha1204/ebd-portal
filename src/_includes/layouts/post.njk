@@ -1,0 +1,74 @@
+---
+layout: base.njk
+---
+
+<main style="padding-top: 3rem; min-height: 80vh;">
+    <div class="container" style="max-width: 800px; margin: 0 auto; padding: 0 1.5rem;">
+        <a href="javascript:history.back()" class="btn btn-outline" style="margin-bottom: 2rem; padding: 0.5rem 1rem; font-size: 0.8rem;">&larr; Voltar</a>
+
+        <header style="text-align: center; margin-bottom: 3rem;">
+            {% if image %}
+            <img src="{{ image }}" style="width: 100%; height: 350px; object-fit: cover; border-radius: 8px; margin-bottom: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            {% endif %}
+
+            <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                {% for tag in tags %}
+                    {% if tag != "post" and tag != "artigo" and tag != "aula" and tag != "video" and tag != "livro" %}
+                    <a href="/pesquisa/?tag={{ tag }}" style="background: #f1f5f9; color: #64748B; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; text-decoration: none;">{{ tag }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <h1 style="font-size: 2.5rem; line-height: 1.2; margin-bottom: 1rem; color: #141414; font-family: 'Inter', sans-serif;">{{ title }}</h1>
+            <div style="color: #64748B; font-size: 0.9rem;">
+                Por <strong>{{ author }}</strong> • {{ date | postDate }}
+            </div>
+        </header>
+
+        <article style="font-size: 1.2rem; line-height: 1.8; color: #333; margin-bottom: 4rem; font-family: 'Merriweather', serif;">
+            
+            {% if youtubeLink %}
+            <div style="margin-bottom: 2rem;">
+                <button onclick="openVideo('{{ youtubeLink }}')" class="btn btn-primary" style="background: #ef4444; width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    ASSISTIR VÍDEO AGORA
+                </button>
+            </div>
+            {% endif %}
+
+            {{ content | safe }}
+
+            {% if pdf %}
+            <div style="background: #f8fafc; border: 2px solid var(--accent-color); border-radius: 8px; padding: 2rem; margin-top: 3rem; text-align: center;">
+                <h3 style="margin-bottom: 0.5rem; font-family: 'Inter', sans-serif;">Material de Apoio</h3>
+                <p style="color: #64748B; margin-bottom: 1.5rem;">Baixe o material utilizado nesta aula.</p>
+                <a href="{{ pdf }}" target="_blank" class="btn btn-primary">BAIXAR ARQUIVO ↓</a>
+            </div>
+            {% endif %}
+            
+            {% if amazonLink %}
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="{{ amazonLink }}" target="_blank" class="btn btn-outline" style="border-color: #FF9900; color: #FF9900;">COMPRAR NA AMAZON ↗</a>
+            </div>
+            {% endif %}
+        </article>
+
+        <div style="border-top: 1px solid #e2e8f0; margin-top: 4rem; padding-top: 3rem;">
+            <h3 style="margin-bottom: 2rem; border-left: 4px solid var(--accent-color); padding-left: 1rem; font-family: 'Inter', sans-serif;">Veja Também</h3>
+            <div class="feed-grid">
+                {% for post in collections.all | reverse %}
+                    {% if loop.index0 < 3 and post.url != page.url and post.data.title %}
+                    <div class="card">
+                        <div style="height: 150px; overflow: hidden;">
+                            <img src="{{ post.data.image }}" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="card-body">
+                            <h4 style="font-size: 1rem; margin-top: 0; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif;">{{ post.data.title }}</h4>
+                            <a href="{{ post.url }}" class="btn btn-outline" style="margin-top: auto; font-size: 0.8rem; width:100%">VER CONTEÚDO</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>

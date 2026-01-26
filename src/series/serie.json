@@ -1,0 +1,4 @@
+{
+  "layout": "layouts/serie.njk",
+  "tags": ["serie"]
+}
