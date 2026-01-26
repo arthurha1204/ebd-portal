@@ -9,7 +9,7 @@ title: Início
         <div class="container">
             <div style="max-width: 600px;">
                 <h1>Ensinar. Instruir. Aprender.</h1>
-                <p style="font-size: 1.15rem; margin-bottom: 2rem; opacity: 0.9; font-weight: 300;">
+                <p style="font-size: 1.15rem; margin-bottom: 2rem; opacity: 0.9;">
                     Portal de conteúdo da Escola Bíblica Dominical da Juventude da Catedral da Reconciliação. forjando uma geração firmada nas sagradas escrituras!
                 </p>
                 <a href="/estudos/" class="btn btn-accent">Explorar Conteúdos</a>
@@ -20,39 +20,64 @@ title: Início
     <div class="container main-grid">
         <section>
             <h2 style="border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 2rem;">Últimas Atualizações</h2>
+            
             <div id="unified-feed" class="feed-grid">
                 {% for post in collections.all | reverse %}
-                    {% if loop.index0 < 4 and post.data.title %}
+                    {% if loop.index0 < 6 and post.data.title %}
                     <article class="card">
                         <div style="height: 200px; position: relative; overflow:hidden;">
+                            
                             {% set badgeColor = "var(--primary-color)" %}
                             {% set typeLabel = "CONTEÚDO" %}
-                            {% if '/videos/' in post.url %} {% set badgeColor = "#ef4444" %} {% set typeLabel = "VÍDEO" %}
-                            {% elif '/aulas/' in post.url %} {% set badgeColor = "var(--accent-color)" %} {% set typeLabel = "AULA" %}
-                            {% elif '/artigos/' in post.url %} {% set badgeColor = "var(--primary-color)" %} {% set typeLabel = "ARTIGO" %}
+                            
+                            {% if '/videos/' in post.url %} 
+                                {% set badgeColor = "#ef4444" %} 
+                                {% set typeLabel = "VÍDEO" %}
+                            {% elif '/aulas/' in post.url %} 
+                                {% set badgeColor = "var(--accent-color)" %} 
+                                {% set typeLabel = "AULA" %}
+                            {% elif '/artigos/' in post.url %} 
+                                {% set badgeColor = "var(--primary-color)" %} 
+                                {% set typeLabel = "ARTIGO" %}
+                            {% elif '/livros/' in post.url %} 
+                                {% set badgeColor = "#d97706" %} 
+                                {% set typeLabel = "LIVRO" %}
+                            {% elif '/series/' in post.url %} 
+                                {% set badgeColor = "#0267a7" %} 
+                                {% set typeLabel = "SÉRIE" %}
                             {% endif %}
                             
-                            <span class="content-type-badge" style="background-color:{{ badgeColor }};">{{ typeLabel }}</span>
+                            <span class="content-type-badge" style="background-color: {{ badgeColor }};">{{ typeLabel }}</span>
                             
                             {% if post.data.image %}
-                            <img src="{{ post.data.image }}" alt="{{ post.data.title }}" style="width:100%; height:100%; object-fit:cover;">
+                                <img src="{{ post.data.image }}" alt="{{ post.data.title }}" style="width:100%; height:100%; object-fit:cover;">
+                            {% elif post.data.cover %}
+                                <img src="{{ post.data.cover }}" alt="{{ post.data.title }}" style="width:100%; height:100%; object-fit:cover;">
+                            {% else %}
+                                <img src="/assets/fundo.jpg" alt="Capa Padrão" style="width:100%; height:100%; object-fit:cover;">
                             {% endif %}
                         </div>
                         
                         <div class="card-content">
                             <div style="margin-bottom:0.5rem;">
                                 {% for tag in post.data.tags %}
-                                    {% if tag != 'post' and tag != 'artigo' and tag != 'aula' and tag != 'video' %}
+                                    {% if tag != 'post' and tag != 'artigo' and tag != 'aula' and tag != 'video' and tag != 'livro' and tag != 'serie' %}
                                     <span class="tag">{{ tag }}</span>
                                     {% endif %}
                                 {% endfor %}
                             </div>
 
                             <h3 style="font-size: 1.2rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">{{ post.data.title }}</h3>
+                            
                             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
                                 {{ post.date | postDate }} • {{ post.data.author }}
                             </p>
-                            <p style="font-size: 0.9rem; margin-bottom: 1.5rem; color: #333;">{{ post.data.description }}</p>
+                            
+                            {% if post.data.description or post.data.resumo %}
+                            <p style="font-size: 0.9rem; margin-bottom: 1.5rem; color: #333; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                                {{ post.data.description or post.data.resumo }}
+                            </p>
+                            {% endif %}
                             
                             <a href="{{ post.url }}" class="btn btn-outline" style="width: 100%; margin-top: auto;">VER CONTEÚDO</a>
                         </div>
@@ -155,7 +180,7 @@ title: Início
                 <span class="stat-sub">E CADA VEZ AUMENTANDO!</span>
                 <div class="stat-footer">
                     <span class="stat-highlight">e o melhor, É GRATUITO!</span>
-                    <p>Domingo, 17:40h na Capela Dr Marcílio<br>Catedral da Reconciliação - IECB</p>
+                    <p class="stat-location">Domingo, 17:40h na Capela Dr Marcílio<br>Catedral da Reconciliação - IECB</p>
                 </div>
             </div>
 
@@ -179,21 +204,7 @@ title: Início
         </div>
     </section>
 
-    <section class="newsletter-section">
-        <div class="container newsletter-content">
-            <div class="newsletter-text">
-                <h2>Não perca nenhum conteúdo</h2>
-                <p>Receba avisos das novas aulas, artigos e vídeos diretamente no seu e-mail.</p>
-            </div>
-            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Em breve!');">
-                <input type="email" placeholder="Seu melhor e-mail" required>
-                <button type="submit" class="btn btn-primary">INSCREVER-SE</button>
-            </form>
-        </div>
-    </section>
-    
     <script>
-        // SCRIPT DA PREGAÇÃO
         async function fetchLatestVideo() {
             const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?user=paraReconciliar`;
             const container = document.getElementById('latest-video-container');
@@ -231,7 +242,6 @@ title: Início
             }
         }
 
-        // STATS ANIMATION
         function animateValue(id, start, end, duration) {
             const obj = document.getElementById(id);
             if(!obj) return;
