@@ -1,44 +1,46 @@
 ---
 layout: base.njk
-title: Estudos
+title: Estudos e Aulas
 ---
 
-<main>
+<main style="padding-top: 3rem;">
     <div class="container">
-        <h1 style="text-align: center; margin-top: 2rem;">Nossos Estudos</h1>
-        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem;">Material organizado por séries e temas.</p>
-        
-        <div id="studies-content">
-            <h2 style="margin-bottom: 1.5rem; border-left: 4px solid var(--accent-color); padding-left: 1rem;">Séries de Estudo</h2>
-            <div class="feed-grid" style="margin-bottom: 3rem;">
-                {% for serie in collections.series %}
-                <div class="card">
-                     <div class="card-body">
-                        <span class="badge-soon" style="margin-left:0;">{{ serie.data.sigla }}</span>
-                        <h3 style="margin-top: 0.5rem;">{{ serie.data.title }}</h3>
-                        <p style="font-size: 0.9rem; color: #64748B;">{{ serie.data.description }}</p>
-                     </div>
-                </div>
-                {% endfor %}
-            </div>
+        <h1 style="text-align: center; margin-bottom: 2rem;">Nossos Estudos</h1>
 
-            <h2 style="margin-bottom: 1.5rem; border-left: 4px solid var(--primary-color); padding-left: 1rem;">Materiais de Aula (PDFs)</h2>
-            <div class="feed-grid">
-                {% for aula in collections.aulas | reverse %}
-                <div class="card">
-                    {% if aula.data.image %}
-                    <img src="{{ aula.data.image }}" class="card-img-top" alt="{{ aula.data.title }}">
-                    {% endif %}
-                    <div class="card-body">
-                        <h4>{{ aula.data.title }}</h4>
-                        <p style="font-size: 0.85rem; margin-bottom: 1rem;">{{ aula.data.description }}</p>
-                        {% if aula.data.pdf %}
-                        <a href="{{ aula.data.pdf }}" target="_blank" class="btn btn-outline" style="width:100%; margin-top:auto;">BAIXAR MATERIAL ↓</a>
-                        {% endif %}
-                    </div>
+        <h2 style="border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; margin-bottom: 1.5rem;">Séries de Estudo</h2>
+        <div class="series-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+            {% for serie in collections.series %}
+            <div class="series-card" style="border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden;">
+                <div style="background: {{ serie.data.color }}; padding: 2rem; text-align: center; color: #fff;">
+                    <div style="font-size: 2rem; font-weight: 800; opacity: 0.3;">{{ serie.data.sigla }}</div>
+                    <h3 style="color: #fff; margin-top: -10px;">{{ serie.data.title }}</h3>
                 </div>
-                {% endfor %}
+                <div style="padding: 1rem; text-align: center;">
+                    <a href="{{ serie.url }}" class="btn btn-outline" style="width: 100%;">VER SÉRIE</a>
+                </div>
             </div>
+            {% endfor %}
+        </div>
+
+        <h2 style="border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; margin-bottom: 1.5rem;">Materiais de Aula & Artigos</h2>
+        <div class="feed-grid">
+            {% for post in collections.all | reverse %}
+                {% if ('/aulas/' in post.url or '/artigos/' in post.url) and post.data.title %}
+                <article class="card">
+                    <div style="height: 180px; position: relative; overflow:hidden;">
+                        <span class="content-type-badge" style="background-color: {% if '/aulas/' in post.url %}var(--accent-color){% else %}var(--primary-color){% endif %};">
+                            {% if '/aulas/' in post.url %}AULA{% else %}ARTIGO{% endif %}
+                        </span>
+                        <img src="{{ post.data.image or '/assets/fundo.jpg' }}" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="card-content">
+                        <h3 style="font-size: 1.1rem;">{{ post.data.title }}</h3>
+                        <p style="font-size: 0.85rem; color: #64748B;">{{ post.date | postDate }}</p>
+                        <a href="{{ post.url }}" class="btn btn-outline" style="width: 100%; margin-top: auto;">LER</a>
+                    </div>
+                </article>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 </main>

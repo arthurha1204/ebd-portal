@@ -16,9 +16,9 @@ layout: base.njk
             </p>
             
             {% if tag_serie %}
-            <span class="tag" style="background: rgba(255,255,255,0.2); color: #fff; border: 1px solid rgba(255,255,255,0.4); margin-top: 1rem;">
+            <a href="/pesquisa/?tag={{ tag_serie }}" class="tag" style="background: rgba(255,255,255,0.2); color: #fff; border: 1px solid rgba(255,255,255,0.4); margin-top: 1rem;">
                 {{ tag_serie }}
-            </span>
+            </a>
             {% endif %}
         </div>
     </div>
@@ -30,7 +30,7 @@ layout: base.njk
 
         <ul class="lesson-list" style="list-style: none; padding: 0;">
             {% set encontrou = false %}
-            {% for aula in collections.aulas %}
+            {% for aula in collections.aulas | reverse %}
                 {% if aula.data.serie == title %}
                 {% set encontrou = true %}
                 <li class="lesson-item" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid #f1f5f9;">

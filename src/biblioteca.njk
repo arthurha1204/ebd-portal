@@ -3,46 +3,37 @@ layout: base.njk
 title: Biblioteca
 ---
 
-<main>
+<main style="padding-top: 3rem;">
     <div class="container">
-        <div class="section-header">
-            <h2>Biblioteca Recomendada</h2>
-            <span style="font-size: 0.85rem; color: var(--text-muted);">Livros para aprofundamento</span>
-        </div>
-        
-        <div class="feed-grid" style="margin-bottom: 4rem;">
-            {% for livro in collections.livros %}
+        <h1 style="text-align: center; margin-bottom: 3rem;">Biblioteca e Multimídia</h1>
+
+        <h2 style="border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; margin-bottom: 1.5rem;">Livros Recomendados</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+            {% for livro in collections.livros | reverse %}
             <div class="card">
-                {% if livro.data.cover %}
-                <img src="{{ livro.data.cover }}" alt="{{ livro.data.title }}" class="card-img-top" style="height: 250px; object-fit: contain; background: #f1f5f9; padding: 10px;">
-                {% endif %}
-                <div style="padding: 1.5rem; display:flex; flex-direction:column; flex-grow:1;">
+                <img src="{{ livro.data.cover }}" style="aspect-ratio: 2/3; object-fit: cover; width: 100%;">
+                <div style="padding: 1rem;">
                     <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">{{ livro.data.title }}</h3>
-                    <p style="font-size: 0.85rem; font-weight:700; color:var(--accent-color);">{{ livro.data.author }}</p>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; font-style: italic;">"{{ livro.data.resumo }}"</p>
-                    
-                    {% if livro.data.amazonLink %}
-                    <a href="{{ livro.data.amazonLink }}" target="_blank" class="btn btn-outline" style="width: 100%; font-size: 0.75rem; margin-top:auto;">Comprar na Amazon ↗</a>
-                    {% endif %}
+                    <a href="{{ livro.url }}" class="btn btn-primary" style="width: 100%; font-size: 0.8rem;">VER DETALHES</a>
                 </div>
             </div>
             {% endfor %}
         </div>
 
-        <div class="section-header">
-            <h2>Multimídia & Indicações</h2>
-            <span style="font-size: 0.85rem; color: var(--text-muted);">Vídeos selecionados</span>
-        </div>
-        
-        <div class="feed-grid" style="padding-bottom: 3rem;">
-            {% for video in collections.videos %}
-            <div class="card">
-                <div style="padding: 1.5rem;">
-                    <h3>{{ video.data.title }}</h3>
-                    <p style="font-size:0.8rem; margin-bottom:1rem;">Por {{ video.data.author }}</p>
-                    <a href="{{ video.data.youtubeLink }}" target="_blank" class="btn btn-primary" style="width:100%">ASSISTIR NO YOUTUBE ▶</a>
+        <h2 style="border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; margin-bottom: 1.5rem;">Multimídia & Indicações</h2>
+        <div class="feed-grid">
+            {% for video in collections.videos | reverse %}
+            <article class="card">
+                <div style="height: 180px; position: relative; overflow:hidden;">
+                    <span class="content-type-badge" style="background-color: #ef4444;">VÍDEO</span>
+                    <img src="{{ video.data.image }}" style="width:100%; height:100%; object-fit:cover;">
                 </div>
-            </div>
+                <div class="card-content">
+                    <h3 style="font-size: 1.1rem;">{{ video.data.title }}</h3>
+                    <p style="font-size: 0.85rem; color: #64748B;">{{ video.data.author }}</p>
+                    <a href="{{ video.url }}" class="btn btn-outline" style="width: 100%; margin-top: auto;">ASSISTIR</a>
+                </div>
+            </article>
             {% endfor %}
         </div>
     </div>

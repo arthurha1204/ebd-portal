@@ -18,6 +18,7 @@ title: Início
     </section>
 
     <div class="container main-grid">
+        
         <section>
             <h2 style="border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; margin-bottom: 2rem;">Últimas Atualizações</h2>
             
@@ -31,20 +32,15 @@ title: Início
                             {% set typeLabel = "CONTEÚDO" %}
                             
                             {% if '/videos/' in post.url %} 
-                                {% set badgeColor = "#ef4444" %} 
-                                {% set typeLabel = "VÍDEO" %}
+                                {% set badgeColor = "#ef4444" %} {% set typeLabel = "VÍDEO" %}
                             {% elif '/aulas/' in post.url %} 
-                                {% set badgeColor = "var(--accent-color)" %} 
-                                {% set typeLabel = "AULA" %}
+                                {% set badgeColor = "var(--accent-color)" %} {% set typeLabel = "AULA" %}
                             {% elif '/artigos/' in post.url %} 
-                                {% set badgeColor = "var(--primary-color)" %} 
-                                {% set typeLabel = "ARTIGO" %}
+                                {% set badgeColor = "var(--primary-color)" %} {% set typeLabel = "ARTIGO" %}
                             {% elif '/livros/' in post.url %} 
-                                {% set badgeColor = "#d97706" %} 
-                                {% set typeLabel = "LIVRO" %}
+                                {% set badgeColor = "#d97706" %} {% set typeLabel = "LIVRO" %}
                             {% elif '/series/' in post.url %} 
-                                {% set badgeColor = "#0267a7" %} 
-                                {% set typeLabel = "SÉRIE" %}
+                                {% set badgeColor = "#0267a7" %} {% set typeLabel = "SÉRIE" %}
                             {% endif %}
                             
                             <span class="content-type-badge" style="background-color: {{ badgeColor }};">{{ typeLabel }}</span>
@@ -62,12 +58,12 @@ title: Início
                             <div style="margin-bottom:0.5rem;">
                                 {% for tag in post.data.tags %}
                                     {% if tag != 'post' and tag != 'artigo' and tag != 'aula' and tag != 'video' and tag != 'livro' and tag != 'serie' %}
-                                    <span class="tag">{{ tag }}</span>
+                                    <a href="/pesquisa/?tag={{ tag }}" class="tag">{{ tag }}</a>
                                     {% endif %}
                                 {% endfor %}
                             </div>
 
-                            <h3 style="font-size: 1.2rem; margin-top: 0.5rem; margin-bottom: 0.5rem;">{{ post.data.title }}</h3>
+                            <h3 style="font-size: 1.2rem; margin-top: 0.5rem; margin-bottom: 0.5rem; line-height: 1.3;">{{ post.data.title }}</h3>
                             
                             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
                                 {{ post.date | postDate }} • {{ post.data.author }}
@@ -93,13 +89,11 @@ title: Início
 
         <aside>
             <div class="sidebar-widget">
-                <h3>Categorias</h3>
-                <ul class="cat-list">
-                    {% for tag in collections.tagList %}
-                        <li><a href="/pesquisa/?tag={{ tag }}">{{ tag }}</a></li>
-                    {% endfor %}
-                    <li><a href="/pesquisa/" style="font-weight:700; color:var(--accent-color)">Ver Todas &rarr;</a></li>
+                <h3>Assuntos Populares</h3>
+                <ul id="top-tags-list" class="cat-list">
+                    <li><span style="font-size:0.8rem; color:#888;">Carregando tópicos...</span></li>
                 </ul>
+                <a href="/pesquisa/" style="display:block; margin-top:1rem; font-weight:700; color:var(--accent-color)">Ver Todas &rarr;</a>
             </div>
 
             <div class="sidebar-widget">
@@ -205,6 +199,7 @@ title: Início
     </section>
 
     <script>
+        // 1. CARREGAR VÍDEO YOUTUBE
         async function fetchLatestVideo() {
             const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?user=paraReconciliar`;
             const container = document.getElementById('latest-video-container');
@@ -242,6 +237,43 @@ title: Início
             }
         }
 
+        // 2. CARREGAR TAGS POPULARES (Lógica Nova)
+        async function loadTopTags() {
+            try {
+                const response = await fetch('/search-index.json');
+                const data = await response.json();
+                
+                const tagCounts = {};
+                data.forEach(item => {
+                    if(item.tags) {
+                        item.tags.forEach(tag => {
+                            // Ignora tags internas/técnicas
+                            if(!['post','artigo','aula','video','livro','serie'].includes(tag.toLowerCase())) {
+                                tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+                            }
+                        });
+                    }
+                });
+
+                // Ordena do maior para o menor e pega os top 10
+                const sortedTags = Object.entries(tagCounts)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 10);
+
+                const list = document.getElementById('top-tags-list');
+                list.innerHTML = '';
+                
+                sortedTags.forEach(([tagName, count]) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="/pesquisa/?tag=${encodeURIComponent(tagName)}" style="display:flex; justify-content:space-between;">
+                                        ${tagName} <span style="color:#ccc; font-size:0.8rem;">(${count})</span>
+                                    </a>`;
+                    list.appendChild(li);
+                });
+            } catch (e) { console.error("Erro tags", e); }
+        }
+
+        // 3. ANIMAÇÃO NÚMEROS
         function animateValue(id, start, end, duration) {
             const obj = document.getElementById(id);
             if(!obj) return;
@@ -255,8 +287,11 @@ title: Início
             window.requestAnimationFrame(step);
         }
 
+        // INICIALIZAÇÃO
         document.addEventListener('DOMContentLoaded', () => {
             fetchLatestVideo();
+            loadTopTags(); // Chama a função das tags
+            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {

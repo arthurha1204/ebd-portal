@@ -6,12 +6,20 @@ eleventyExcludeFromCollections: true
     {% for item in collections.all %}
     {% if item.data.title %}
     {
-        "title": "{{ item.data.title | replace('"', '') }}",
+        "title": "{{ item.data.title | replace('"', '') | safe }}",
         "author": "{{ item.data.author | default('Equipe') }}",
         "date": "{{ item.date | postDate }}",
         "url": "{{ item.url }}",
-        "image": "{{ item.data.image | default('/assets/fundo.jpg') }}",
-        "tags": {{ item.data.tags | dump | safe }}
+        
+        {# Lógica de Imagem: Tenta 'image', se não tiver tenta 'cover' (livro), se não tiver usa padrão #}
+        "image": "{{ item.data.image or item.data.cover or '/assets/fundo.jpg' }}",
+        
+        "description": "{{ item.data.description or item.data.resumo | default('') | replace('"', '') | safe }}",
+        
+        "tags": {{ item.data.tags | dump | safe }},
+        
+        {# Lógica Vital para o Filtro de Tipo funcionar #}
+        "type": "{% if '/videos/' in item.url %}video{% elif '/aulas/' in item.url %}aula{% elif '/livros/' in item.url %}livro{% elif '/series/' in item.url %}serie{% else %}artigo{% endif %}"
     }{% if not loop.last %},{% endif %}
     {% endif %}
     {% endfor %}

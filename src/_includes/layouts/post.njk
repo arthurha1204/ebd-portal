@@ -53,13 +53,13 @@ layout: base.njk
                 </iframe>
             </div>
             
-            <header style="margin-bottom: 2rem;">
+            <header style="margin-bottom: 2rem; text-align: center;">
                 <div style="display: flex; gap: 10px; margin-bottom: 10px; justify-content: center;">
                     <span class="tag tag-blue">Vídeo</span>
                     {% for tag in tags %}{% if tag != 'video' %}<span class="tag">{{ tag }}</span>{% endif %}{% endfor %}
                 </div>
-                <h1 style="margin-bottom: 0.5rem; text-align: center;">{{ title }}</h1>
-                <p style="color: var(--text-muted); font-weight: 500; text-align: center;">Canal: {{ author }} • Publicado em: {{ date | postDate }}</p>
+                <h1 style="margin-bottom: 0.5rem;">{{ title }}</h1>
+                <p style="color: var(--text-muted); font-weight: 500;">Canal: {{ author }} • Publicado em: {{ date | postDate }}</p>
             </header>
             <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid #e2e8f0;">
 
@@ -72,7 +72,7 @@ layout: base.njk
                     <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
                          {% for tag in tags %}
                             {% if tag != "post" and tag != "artigo" and tag != "aula" %}
-                            <span class="tag">{{ tag }}</span>
+                            <a href="/pesquisa/?tag={{ tag }}" class="tag">{{ tag }}</a>
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -95,7 +95,7 @@ layout: base.njk
                         Baixe o PDF com os slides e anotações utilizados nesta lição.
                     </p>
                     <a href="{{ pdf }}" download class="btn btn-primary">
-                        <svg style="width:18px; height:18px; margin-right:8px; stroke:currentColor; fill:none; stroke-width:2; vertical-align: middle;" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        <svg style="width:18px; height:18px; margin-right:8px; stroke:currentColor; fill:none; stroke-width:2; vertical-align:middle" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                         BAIXAR PDF
                     </a>
                 </div>
@@ -103,35 +103,26 @@ layout: base.njk
             </article>
 
         {% endif %} <div style="border-top: 1px solid #e2e8f0; margin-top: 4rem; padding-top: 3rem;">
-            <h3 style="margin-bottom: 2rem; border-left: 4px solid var(--accent-color); padding-left: 1rem; font-family: 'Inter', sans-serif;">Últimas Atualizações</h3>
+            <h3 style="margin-bottom: 2rem; border-left: 4px solid var(--accent-color); padding-left: 1rem; font-family: 'Inter', sans-serif;">Veja Também</h3>
             <div class="feed-grid">
                 {% for post in collections.all | reverse %}
                     {% if loop.index0 < 3 and post.url != page.url and post.data.title %}
-                    <div class="card">
+                    <article class="card">
                         <div style="height: 150px; position: relative; overflow:hidden;">
-                             {% set badgeColor = "var(--primary-color)" %}
-                            {% set typeLabel = "CONTEÚDO" %}
+                            {% set badgeColor = "var(--primary-color)" %} {% set typeLabel = "CONTEÚDO" %}
                             {% if '/videos/' in post.url %} {% set badgeColor = "#ef4444" %} {% set typeLabel = "VÍDEO" %}
                             {% elif '/aulas/' in post.url %} {% set badgeColor = "var(--accent-color)" %} {% set typeLabel = "AULA" %}
                             {% elif '/livros/' in post.url %} {% set badgeColor = "#d97706" %} {% set typeLabel = "LIVRO" %}
                             {% endif %}
                             
                             <span class="content-type-badge" style="background-color: {{ badgeColor }};">{{ typeLabel }}</span>
-                            
-                            {% if post.data.image %}
-                            <img src="{{ post.data.image }}" style="width: 100%; height: 100%; object-fit: cover;">
-                            {% elif post.data.cover %}
-                             <img src="{{ post.data.cover }}" style="width: 100%; height: 100%; object-fit: cover;">
-                            {% else %}
-                             <img src="/assets/fundo.jpg" style="width: 100%; height: 100%; object-fit: cover;">
-                            {% endif %}
+                            <img src="{{ post.data.image or post.data.cover or '/assets/fundo.jpg' }}" style="width:100%; height:100%; object-fit:cover;">
                         </div>
                         <div class="card-content">
-                            <h4 style="font-size: 1rem; margin-top: 0; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif;">{{ post.data.title }}</h4>
-                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">{{ post.data.author }}</p>
-                            <a href="{{ post.url }}" class="btn btn-outline" style="width: 100%; margin-top: auto; font-size: 0.8rem;">VER CONTEÚDO</a>
+                            <h4 style="font-size: 1rem; margin: 0.5rem 0;">{{ post.data.title }}</h4>
+                            <a href="{{ post.url }}" class="btn btn-outline" style="width: 100%; margin-top: auto; font-size: 0.8rem;">VER</a>
                         </div>
-                    </div>
+                    </article>
                     {% endif %}
                 {% endfor %}
             </div>

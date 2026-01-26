@@ -23,7 +23,8 @@ collections:
       - {label: "Autor", name: "author", widget: "string", default: "Equipe EBD"}
       - {label: "Data de Publicação", name: "date", widget: "datetime"}
       - {label: "Imagem de Capa", name: "image", widget: "image"}
-      - {label: "Tags", name: "tags", widget: "list", default: ["Artigo"]}
+      # CAMPO DE TAGS ATUALIZADO
+      - {label: "Tags (Assuntos)", name: "tags", widget: "list", default: ["Teologia"], hint: "Adicione tópicos como: Teologia, Vida Cristã, História, etc."}
       - {label: "Resumo (aparece no card)", name: "description", widget: "text"}
       - {label: "Corpo do Texto", name: "body", widget: "markdown"}
 
@@ -38,12 +39,13 @@ collections:
       - {label: "Ministrante", name: "author", widget: "string"}
       - {label: "Data da Aula", name: "date", widget: "datetime"}
       - {label: "Imagem de Capa", name: "image", widget: "image"}
-      - {label: "Tags", name: "tags", widget: "list", default: ["Aula"]}
+      # CAMPO DE TAGS ATUALIZADO
+      - {label: "Tags (Assuntos)", name: "tags", widget: "list", default: ["Bíblia"], hint: "Ex: Novo Testamento, Doutrina, etc."}
       - {label: "Resumo do que foi ensinado", name: "description", widget: "text"}
-      # MUDANÇA IMPORTANTE: Widget FILE para permitir upload real
+      # Upload de Arquivo
       - {label: "Arquivo de Apoio (PDF/PPT)", name: "pdf", widget: "file", required: false}
       # Relação com Séries
-      - {label: "Série Pertencente", name: "serie", widget: "relation", collection: "series", search_fields: ["title"], value_field: "title", required: false}
+      - {label: "Série Pertencente", name: "serie", widget: "relation", collection: "series", search_fields: ["title"], value_field: "title", required: false, hint: "Selecione a série para agrupar esta aula"}
 
   # 3. SÉRIES
   - name: "series"
@@ -53,9 +55,11 @@ collections:
     fields:
       - {label: "Título da Série", name: "title", widget: "string"}
       - {label: "Sigla (Ex: GEN, ROM)", name: "sigla", widget: "string"}
-      # ADICIONADO: Seletor de cor
       - {label: "Cor de Destaque", name: "color", widget: "color", default: "#0267a7", required: false}
-      - {label: "Tag Geral", name: "tag_serie", widget: "string", hint: "Use a mesma tag que usará nas aulas individuais"}
+      # Tag Geral (Usada para agrupar no código)
+      - {label: "Tag de Agrupamento", name: "tag_serie", widget: "string", hint: "Tag técnica usada para puxar as aulas (Ex: romanos)"}
+      # Tags de Busca (Novo)
+      - {label: "Tags (Para Pesquisa)", name: "tags", widget: "list", default: ["Série"], hint: "Tags para esta série aparecer na busca por assunto"}
       - {label: "Descrição da Série", name: "description", widget: "text"}
 
   # 4. VÍDEOS
@@ -67,10 +71,9 @@ collections:
       - {label: "Título do Vídeo", name: "title", widget: "string"}
       - {label: "Canal/Autor", name: "author", widget: "string"}
       - {label: "Data de Publicação", name: "date", widget: "datetime"}
-      # Ajustado para Link completo para facilitar
       - {label: "Link do YouTube", name: "youtubeLink", widget: "string", hint: "Cole a URL completa do vídeo"}
       - {label: "Thumbnail (Capa)", name: "image", widget: "image", hint: "Salve a capa do YouTube e suba aqui"}
-      - {label: "Tags", name: "tags", widget: "list", default: ["Vídeo"]}
+      - {label: "Tags (Assuntos)", name: "tags", widget: "list", default: ["Vídeo"]}
 
   # 5. LIVROS
   - name: "livros"
@@ -83,4 +86,4 @@ collections:
       - {label: "Capa do Livro", name: "cover", widget: "image"}
       - {label: "Breve Resumo (Por que ler?)", name: "resumo", widget: "text"}
       - {label: "Link Amazon", name: "amazonLink", widget: "string"}
-      - {label: "Tags", name: "tags", widget: "list", default: ["Livro"]}
+      - {label: "Tags (Assuntos)", name: "tags", widget: "list", default: ["Livro, Leitura"]}
