@@ -14,7 +14,7 @@ layout: base.njk
             <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
                 {% for tag in tags %}
                     {% if tag != "post" and tag != "artigo" and tag != "aula" and tag != "video" and tag != "livro" %}
-                    <a href="/pesquisa/?tag={{ tag }}" style="background: #f1f5f9; color: #64748B; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; text-decoration: none;">{{ tag }}</a>
+                    <a href="/pesquisa/?tag={{ tag }}" class="tag">{{ tag }}</a>
                     {% endif %}
                 {% endfor %}
             </div>
@@ -61,7 +61,7 @@ layout: base.njk
                         <div style="height: 150px; overflow: hidden;">
                             <img src="{{ post.data.image }}" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
-                        <div class="card-body">
+                        <div class="card-content">
                             <h4 style="font-size: 1rem; margin-top: 0; margin-bottom: 0.5rem; font-family: 'Inter', sans-serif;">{{ post.data.title }}</h4>
                             <a href="{{ post.url }}" class="btn btn-outline" style="margin-top: auto; font-size: 0.8rem; width:100%">VER CONTEÚDO</a>
                         </div>
