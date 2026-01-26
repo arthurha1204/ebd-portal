@@ -25,11 +25,11 @@ title: Início
                     {% if loop.index0 < 4 and post.data.title %}
                     <article class="card">
                         <div style="height: 200px; position: relative; overflow:hidden;">
-                            {% set badgeColor = "#141414" %}
+                            {% set badgeColor = "var(--primary-color)" %}
                             {% set typeLabel = "CONTEÚDO" %}
                             {% if '/videos/' in post.url %} {% set badgeColor = "#ef4444" %} {% set typeLabel = "VÍDEO" %}
-                            {% elif '/aulas/' in post.url %} {% set badgeColor = "#0267a7" %} {% set typeLabel = "AULA" %}
-                            {% elif '/artigos/' in post.url %} {% set badgeColor = "#141414" %} {% set typeLabel = "ARTIGO" %}
+                            {% elif '/aulas/' in post.url %} {% set badgeColor = "var(--accent-color)" %} {% set typeLabel = "AULA" %}
+                            {% elif '/artigos/' in post.url %} {% set badgeColor = "var(--primary-color)" %} {% set typeLabel = "ARTIGO" %}
                             {% endif %}
                             
                             <span class="content-type-badge" style="background-color:{{ badgeColor }};">{{ typeLabel }}</span>
@@ -52,6 +52,7 @@ title: Início
                             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
                                 {{ post.date | postDate }} • {{ post.data.author }}
                             </p>
+                            <p style="font-size: 0.9rem; margin-bottom: 1.5rem; color: #333;">{{ post.data.description }}</p>
                             
                             <a href="{{ post.url }}" class="btn btn-outline" style="width: 100%; margin-top: auto;">VER CONTEÚDO</a>
                         </div>
@@ -154,7 +155,7 @@ title: Início
                 <span class="stat-sub">E CADA VEZ AUMENTANDO!</span>
                 <div class="stat-footer">
                     <span class="stat-highlight">e o melhor, É GRATUITO!</span>
-                    <p class="stat-location">Domingo, 17:40h na Capela Dr Marcílio<br>Catedral da Reconciliação - IECB</p>
+                    <p>Domingo, 17:40h na Capela Dr Marcílio<br>Catedral da Reconciliação - IECB</p>
                 </div>
             </div>
 
@@ -192,7 +193,7 @@ title: Início
     </section>
     
     <script>
-        // SCRIPT DA PREGAÇÃO (Corrigido para rodar após o HTML carregar)
+        // SCRIPT DA PREGAÇÃO
         async function fetchLatestVideo() {
             const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?user=paraReconciliar`;
             const container = document.getElementById('latest-video-container');
