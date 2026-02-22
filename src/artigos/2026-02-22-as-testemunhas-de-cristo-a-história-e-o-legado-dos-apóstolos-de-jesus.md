@@ -14,17 +14,31 @@ description: Conheça os detalhes históricos sobre onde cada um deles pregou ap
 ---
 **Tempo de leitura: 10 minutos**
 
-Na nossa tradição Episcopal/Anglicana, assim como em outras igrejas irmãs da tradição Luterana, o respeito pela jornada cristã dos primeiros séculos é fundamental. Baseados no famoso "Tripé Anglicano" do teólogo Richard Hooker (1554–1600), valorizamos imensamente a caminhada daqueles que testemunharam o Cristo ressurreto.\
-A teologia expressa por Hooker na monumental obra Of the Laws of Ecclesiastical Polity postula que a fé e a prática da Igreja são sustentadas por três pilares interdependentes: as Escrituras, a Tradição e a Razão. Neste modelo (concebido como uma via media entre os extremos do puritanismo e do catolicismo romano medieval), as Escrituras Sagradas ocupam o lugar de primazia absoluta, contendo todas as verdades inegociáveis e necessárias para a salvação. No entanto, a Tradição histórica da Igreja não é descartada; embora não afirme dogmas com a mesma autoridade inerrante das Escrituras, ela atua como uma bússola interpretativa indispensável que norteia, orienta e preserva a unidade comum da Igreja ao longo dos séculos. A Razão, iluminada pelo Espírito Santo, permite aplicar os textos sagrados e os testemunhos da Tradição às realidades do nosso tempo.\
-Uma das representações visuais mais extraordinárias dessa síntese encontra-se na capa da primeira edição da Bíblia King James de 1611(Capa deste artigo), que mostra todos os Apóstolos distribuídos ao longo da arte, com cada um deles segurando em suas mãos a forma como foi martirizado.\
-Isso mostra como que a herança da Tradição dentro da Igreja persistiu mesmo pós reforma, pois a lembrança e inspiração de cada um daqueles que caminharam junto a Cristo, é válida e de total proveito para a Igreja em todos os seus séculos de existência.
+Na nossa tradição Episcopal/Anglicana, o respeito pela história dos primeiros cristãos é fundamental. Nós valorizamos muito a jornada daqueles que andaram com Jesus e testemunharam a sua ressurreição.\
+Para explicar como vivemos a nossa fé, usamos uma ideia muito conhecida chamada "Tripé Anglicano", criada por um teólogo chamado Richard Hooker no século XVI.
+
+Esse tripé ensina que a vida da Igreja é sustentada por três grandes pilares: as Escrituras, a Tradição e a Razão. Funciona da seguinte forma:
+
+**As Escrituras (A Bíblia):** É o nosso pilar principal. A Bíblia ocupa o lugar de autoridade máxima e absoluta. Ela contém tudo o que é necessário para a nossa salvação e não pode ser substituída por nada.
+
+**A Tradição (A História da Igreja):** A Tradição não tem a mesma autoridade da Bíblia, mas não deve ser jogada fora! Ela funciona como uma bússola. É a memória de como os cristãos que vieram antes de nós viveram e entenderam a fé, ajudando a nos manter no caminho certo ao longo dos séculos.
+
+**A Razão (Nossa inteligência):** Deus nos deu a capacidade de pensar. A Razão, iluminada pelo Espírito Santo, nos ajuda a ler a Bíblia e a Tradição, e a aplicar esses ensinamentos sagrados na nossa vida prática e nos desafios do nosso tempo.
+
+Um exemplo visual muito bacana desse respeito pela história está na capa da famosa primeira edição da Bíblia inglesa King James de 1611 (a imagem de capa deste artigo).  A ilustração mostra todos os Apóstolos desenhados ao redor do texto bíblico. Um detalhe incrível é que cada um deles segura nas mãos o instrumento que foi usado no seu martírio.
+
+Isso nos ensina algo valioso: **mesmo depois da Reforma Protestante, a Igreja não apagou o passado**. A lembrança e o sacrifício daqueles homens que andaram com Cristo continuam sendo uma inspiração poderosa e de muito proveito para a nossa fé até os dias de hoje!
 
 # O Calendário Litúrgico e a Memória dos Mártires
 
 A Tradição dos apóstolos reveste-se de imensa importância prática, teológica e devocional para as igrejas de matriz Episcopal, Anglicana e Luterana, as quais seguem majoritariamente o calendário litúrgico e a roda do Ano Cristão. O calendário santoral organiza a memória da Igreja, celebrando a vida, a obra e o sacrifício dos apóstolos em dias fixos e específicos.\
-Essa memória sagrada determina as cores litúrgicas dos paramentos do clero e dos ornamentos do altar, servindo como uma pedagogia visual para a congregação. Na tradição anglicana, a cor vermelha é reservada primariamente para a festa de Pentecostes e para os dias dedicados aos mártires. O vermelho simboliza o fogo purificador do Espírito Santo derramado sobre a Igreja e, inseparavelmente, o sangue derramado pelos apóstolos na confissão de sua fé inabalável em Cristo. Por exemplo, o Dia de Santo André é celebrado em 30 de novembro; visto que a Tradição atesta que André sofreu um martírio brutal, a cor litúrgica designada para o seu dia é invariavelmente a **VERMELHA.**\
+Essa memória sagrada determina as cores litúrgicas dos paramentos do clero e dos ornamentos do altar, servindo como uma pedagogia visual para a congregação. Na tradição anglicana, a cor vermelha é reservada primariamente para a festa de Pentecostes e para os dias dedicados aos mártires. O vermelho simboliza o fogo purificador do Espírito Santo derramado sobre a Igreja e, inseparavelmente, o sangue derramado pelos apóstolos na confissão de sua fé inabalável em Cristo. 
+
+Por exemplo, **o Dia de Santo André é celebrado em 30 de novembro**; visto que a Tradição atesta que André sofreu um martírio brutal, a cor litúrgica designada para o seu dia é invariavelmente a **VERMELHA.** Toda Igreja então mudará sua cor litúrgica de acordo com tal data.\
 \
-Por outro lado, para o único apóstolo que a tradição histórica atesta ter morrido de causas naturais após uma longa vida de testemunho, São João Evangelista (celebrado em 27 de dezembro), a cor litúrgica utilizada é a **BRANCA.** O branco e o dourado simbolizam a luz incriada de Deus, a pureza, a alegria da ressurreição e a glória celestial.\
+Por outro lado, para o único apóstolo que a tradição histórica atesta ter morrido de causas naturais após uma longa vida de testemunho, São João Evangelista (celebrado em 27 de dezembro), a cor litúrgica utilizada é a **BRANCA.** O branco e o dourado simbolizam a luz incriada de Deus, a pureza, a alegria da ressurreição e a glória celestial.
+
+\
 Abaixo, exploramos a fundo a história, a arqueologia, a fundamentação bíblica e a tradição de cada um dos doze apóstolos originais de Jesus Cristo.
 
 # 1. São Pedro (Simão)
@@ -63,7 +77,7 @@ Abaixo, exploramos a fundo a história, a arqueologia, a fundamentação bíblic
 \
 **Base Bíblica:** Juntamente com seu irmão João e com Pedro, Tiago formava o círculo mais íntimo e restrito dos discípulos (Marcos 1:19-20). Teve o privilégio exclusivo de testemunhar o poder de Cristo na ressurreição da filha de Jairo (Marcos 5:37), a glória divina na Transfiguração (Marcos 9:2), e a angústia do Mestre no Getsêmani (Mateus 26:37). Jesus apelidou os dois irmãos de Boanerges, que significa "Filhos do Trovão" (Marcos 3:17), refletindo o temperamento impetuoso e apaixonado de ambos.\
 \
-**O que a Tradição da Igreja fala:** A antiquíssima tradição ibérica sustenta que Tiago empreendeu uma ambiciosa jornada missionária até o "fim do mundo conhecido": a Hispânia (atual Espanha e Portugal). Relatos atestam que, em profundo desânimo às margens do rio Ebro, ele teria recebido uma aparição miraculosa da Virgem Maria (através do fenômeno da bilocação) sobre um pilar de mármore para encorajá-lo a perseverar.\
+**O que a Tradição da Igreja fala:** A antiquíssima tradição ibérica sustenta que Tiago empreendeu uma ambiciosa jornada missionária até o "fim do mundo conhecido": a Hispânia (atual Espanha e Portugal). \
 \
 **Onde pregou após a ressurreição:** A Hispânia romana, a província mais ocidental do Império, além de pregar ativamente nas sinagogas e praças de Jerusalém ao retornar de sua missão.\
 \
