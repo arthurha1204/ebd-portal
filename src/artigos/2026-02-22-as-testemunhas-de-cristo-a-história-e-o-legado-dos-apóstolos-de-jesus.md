@@ -12,9 +12,7 @@ description: Conheça os detalhes históricos sobre onde cada um deles pregou ap
   a ressurreição de Cristo e como a maioria entregou a própria vida através do
   martírio.
 ---
-# As Testemunhas de Cristo: A História e o Legado dos Apóstolos de Jesus
-
-**Por Arthur HS | Tempo de leitura: 10 minutos**
+**Tempo de leitura: 10 minutos**
 
 Na nossa tradição Episcopal/Anglicana, assim como em outras igrejas irmãs da tradição Luterana, o respeito pela jornada cristã dos primeiros séculos é fundamental. Baseados no famoso "Tripé Anglicano" do teólogo Richard Hooker (1554–1600), valorizamos imensamente a caminhada daqueles que testemunharam o Cristo ressurreto.\
 A teologia expressa por Hooker na monumental obra Of the Laws of Ecclesiastical Polity postula que a fé e a prática da Igreja são sustentadas por três pilares interdependentes: as Escrituras, a Tradição e a Razão. Neste modelo (concebido como uma via media entre os extremos do puritanismo e do catolicismo romano medieval), as Escrituras Sagradas ocupam o lugar de primazia absoluta, contendo todas as verdades inegociáveis e necessárias para a salvação. No entanto, a Tradição histórica da Igreja não é descartada; embora não afirme dogmas com a mesma autoridade inerrante das Escrituras, ela atua como uma bússola interpretativa indispensável que norteia, orienta e preserva a unidade comum da Igreja ao longo dos séculos. A Razão, iluminada pelo Espírito Santo, permite aplicar os textos sagrados e os testemunhos da Tradição às realidades do nosso tempo.\
@@ -196,9 +194,6 @@ Abaixo, exploramos a fundo a história, a arqueologia, a fundamentação bíblic
 **Como Morreu:** A fúria contrita letal trágica o desolou em tormento fatal enlouquecedor irreversível invés de conduzi-lo pacificamente aos ritos catárticos de perdões. Nos tormentos que antecederam a submissão aos ferimentos avassaladores expostos cravados inauditos na Cruz amarga da condenação calvária de Jesus, Judas amargou sob gritos inenarráveis aos altos muros desdenhosos atirando ferozmente as moedas da culpa manchadas amontoadas na esplanada fria do átrio Templo hebraico sacerdotal abandonado e rejeitado friamente com cinismo pelo sinédrio de líderes iníquos no cerco do abismo. Segregou-se isolado sem redenção dos fiéis de outrora marchando lúgubre esmorecido pelos vales imensos ao Campo escasso sombrio escavado do Oleiro. As passagens lúgubres do Evangelista em Mateus redigem-no estéril executando amargamente as vias de se pendurar trágica e desoladoramente nas ramificações inóspitas retorcidas suicidas sufocando e privando sua lastimável respiração através das cordas firmes de uma forca sombria (Mateus 27:5). Complementado fisicamente em desolação trágica por laudos dos estilhaços dos desfiladeiros amargurados que perfazem o narrativo descritivo de Atos de o vácuo tracionar a amarra em colapso desmoronando a força elástica a ponto do abdômen frágil morto apodrecido romper as amarras em chamas despencando esparramando horripilante e fatalmente esmagado pelo maciço duro pedregoso desfazendo rasgados brutalmente os laços abertos pavorosos dos seus intestinos esvaziados escuros (Atos 1:18).
 
 # Conclusão
-
-
-
 
 Olhar para a história destes homens traz-nos um imenso conforto espiritual. O legado dos apóstolos não é feito de lendas distantes e gélidas guardadas em velhas enciclopédias. Pelo contrário, é a mais pura demonstração da graça de Deus em ação.
 
